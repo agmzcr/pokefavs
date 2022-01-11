@@ -1,1 +1,1 @@
-# pokefavs
+# PokeFavs
