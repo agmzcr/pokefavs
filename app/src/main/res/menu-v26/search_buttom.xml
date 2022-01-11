@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_Button"
+        android:iconTint="@color/poke_red"
+        android:icon="@drawable/ic_search"
+        android:title="Search pokemon by name"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always">
+    </item>
+</menu>

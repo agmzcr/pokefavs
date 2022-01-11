@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/evolution_list_item.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/favorite_list_item.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/fragment_details.xml" value="0.4402224281742354" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/fragment_favorites.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/fragment_pokedex.xml" value="0.2296195652173913" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/layout/pokedex_list_item.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs - Copy/app/src/main/res/menu/search_buttom.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/drawable-v24/rounded_top_border.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/drawable/bottom_navigation_colors.xml" value="0.13946488294314383" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/drawable/ic_logo.xml" value="0.1648148148148148" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/evolution_list_item.xml" value="0.35833333333333334" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/favorite_list.xml" value="0.5" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/fragment_about.xml" value="0.25" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/fragment_details.xml" value="0.33" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/fragment_evolution.xml" value="0.31023550724637683" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/fragment_favorites.xml" value="0.1" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/fragment_pokedex.xml" value="0.15" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/fragment_stats.xml" value="0.25" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/pokedex_list_item.xml" value="0.2" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/layout/type_list.xml" value="0.1" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/menu-v26/search_buttom.xml" value="0.18055555555555555" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Nando/AndroidStudioProjects/PokeFavs/app/src/main/res/menu/search_buttom.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

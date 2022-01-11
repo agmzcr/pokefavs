@@ -1,0 +1,50 @@
+<animated-vector xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt" >
+  <aapt:attr name="android:drawable">
+<vector
+    android:width="910.13dp"
+    android:height="908.95dp"
+    android:viewportWidth="910.13"
+    android:viewportHeight="908.95">
+  <path
+      android:pathData="M0,454.06c0.61,-252 204.75,-455.12 456.36,-454.09 251.82,1 454.28,204.19 453.77,455.38s-204.7,454.42 -455.63,453.56C202.59,908.06 -0.6,704.73 0,454.06Z"
+      android:fillColor="#010101"/>
+  <path
+      android:pathData="M173,488.69c35.7,0 71.41,0.21 107.11,-0.17 7.31,-0.08 10.2,2 12,9.28 18.82,73.7 86,125.21 163,125.39A168.44,168.44 0,0 0,618.42 497.86c2,-7.44 4.77,-9.34 12,-9.31q107.67,0.35 215.35,0c8,0 9.52,1.5 8.64,9.91 -17.11,163.09 -136.13,305.55 -302.49,345.19 -136.23,32.45 -259,1.84 -364.57,-90.72 -72,-63.09 -113.69,-143.59 -129.42,-237.73 -4.43,-26.52 -4.49,-26.5 22.66,-26.5Z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M736.7,419.89c-34.94,0 -69.89,-0.26 -104.82,0.19 -8.34,0.11 -11.65,-2.73 -13.91,-10.64C598.18,340.06 537.39,289.83 469.24,286.06c-76.78,-4.26 -141.58,35.28 -170.68,104.14 -0.87,2.07 -1.66,4.19 -2.38,6.31 -8,23.38 -8,23.38 -33.4,23.38 -64.63,0 -129.25,-0.15 -193.88,0.15 -9.61,0 -13.84,-0.92 -12.11,-12.72 22.8,-155.69 106.22,-266.09 251.65,-325 156.73,-63.54 330.1,-21.39 443.93,103.13 57.07,62.43 90.45,136.3 101,220.32 1.76,14.11 1.64,14.15 -12.93,14.16Q788.56,419.9 736.7,419.89Z"
+      android:fillColor="#eb2127"/>
+  <path
+      android:pathData="M456.12,572.59c-64.13,0.57 -118.48,-51.88 -119,-114.84 -0.55,-67.27 51.26,-121 117.05,-121.43 64.85,-0.41 118.47,52.27 119.29,117.21C574.3,518.06 521.11,572.06 456.12,572.59Z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M456.1,396.58c32.69,0.37 57.55,26.21 57.15,59.39 -0.39,31.86 -26.4,56.79 -59,56.55a57.74,57.74 0,0 1,-57.36 -58.33C397.31,421.41 423.2,396.21 456.1,396.58Z"
+      android:fillColor="#010101"/>
+</vector>
+  </aapt:attr>
+  <target android:name="rotationGroup"
+      tools:ignore="ExtraText"> *
+    <aapt:attr name="android:animation">
+      <objectAnimator
+          android:duration="6000"
+          android:propertyName="rotation"
+          android:valueFrom="0"
+          android:valueTo="360" />
+    </aapt:attr>
+  </target>
+
+  <target android:name="v" >
+    <aapt:attr name="android:animation">
+      <set>
+        <objectAnimator
+            android:duration="3000"
+            android:propertyName="pathData"
+            android:valueFrom="M300,70 l 0,-70 70,70 0,0 -70,70z"
+            android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
+            android:valueType="pathType"/>
+      </set>
+    </aapt:attr>
+  </target>
+</animated-vector>

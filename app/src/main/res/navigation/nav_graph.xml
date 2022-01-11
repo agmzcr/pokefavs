@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pokedexFragment">
+
+    <fragment
+        android:id="@+id/pokedexFragment"
+        android:name="dev.agmzcr.pokefavs.ui.pokedex.PokedexFragment"
+        tools:layout="@layout/fragment_pokedex">
+        <action
+            android:id="@+id/action_pokedex_to_details"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="dev.agmzcr.pokefavs.ui.favorites.FavoritesFragment"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favorites_to_details"
+            app:destination="@+id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="dev.agmzcr.pokefavs.ui.details.DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="pokemon"
+            app:nullable="true"
+            android:defaultValue="@null"
+            app:argType="dev.agmzcr.pokefavs.data.model.PokemonResults" />
+        <argument
+            android:name="pokemonId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="pokemonName"
+            app:nullable="true"
+            android:defaultValue="@null"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="dev.agmzcr.pokefavs.ui.details.about.AboutFragment"
+        tools:layout="@layout/fragment_about">
+    </fragment>
+
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="dev.agmzcr.pokefavs.ui.details.stats.StatsFragment"
+        tools:layout="@layout/fragment_stats">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/evolutionFragment"
+        android:name="dev.agmzcr.pokefavs.ui.details.evolution.EvolutionFragment"
+        tools:layout="@layout/fragment_evolution">
+
+    </fragment>
+</navigation>

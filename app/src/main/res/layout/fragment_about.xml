@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="dev.agmzcr.pokefavs.ui.details.DetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Pokedex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/description_Value"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="@{vm.pokemonDetailsData2.description}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/pokedex_Data"
+            style="@style/TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp"
+            android:text="Pokedex Data"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_Value" />
+
+
+        <LinearLayout
+            android:id="@+id/linear_Layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pokedex_Data">
+
+
+            <TextView
+                android:id="@+id/type_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Types"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/species_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Specie"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/height_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Height"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/weight_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Weight"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/habitat_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Habitat"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/abilities_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Abilities"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/capture_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Capture Rate"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/happiness_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Base Happiness"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_Layout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/linear_Layout"
+            app:layout_constraintTop_toBottomOf="@id/pokedex_Data">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/viewType1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:typeImage="@{vm.pokemonDetailsData2.types[0].type.name}" />
+
+                <ImageView
+                    android:id="@+id/viewType2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    app:typeImage="@{vm.pokemonDetailsData2.types[1].type.name}" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/species_Value"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                app:capitalizeFormatter="@{vm.pokemonDetailsData2.genera}"
+                tools:text="Test" />
+
+            <TextView
+                android:id="@+id/height_Value"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                app:heightFormatter="@{vm.pokemonDetailsData2.height}"
+                tools:text="Test" />
+
+            <TextView
+                android:id="@+id/weight_Value"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                app:weightFormatter="@{vm.pokemonDetailsData2.weight}"
+                tools:text="Test" />
+
+            <TextView
+                android:id="@+id/habitat_Value"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                app:capitalizeFormatter="@{vm.pokemonDetailsData2.habitat}"
+                tools:text="Test" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/abilities_Value1"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                app:capitalizeFormatter="@{vm.pokemonDetailsData2.abilities[0].ability.name}"
+                tools:text="Test" />
+
+                <TextView
+                    android:id="@+id/abilities_Value2"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="14sp"
+                    app:capitalizeFormatter="@{vm.pokemonDetailsData2.abilities[1].ability.name}"
+                    tools:text="Test" />
+
+                <TextView
+                    android:id="@+id/abilities_Value3"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="14sp"
+                    app:capitalizeFormatter="@{vm.pokemonDetailsData2.abilities[2].ability.name}"
+                    tools:text="Test" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/capture_Value"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                app:captureRateFormatter="@{vm.pokemonDetailsData2.capture_rate}"
+                tools:text="Test" />
+
+            <TextView
+                android:id="@+id/happiness_Value"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="@{String.valueOf(vm.pokemonDetailsData2.base_happiness)}"
+                tools:text="Test" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
