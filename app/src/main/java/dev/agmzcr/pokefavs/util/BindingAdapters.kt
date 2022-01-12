@@ -1,6 +1,7 @@
 package dev.agmzcr.pokefavs.util
 
 
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -58,7 +59,7 @@ fun loadImagePokemonEvo(
             GlidePalette.with(drawable)
                 .use(BitmapPalette.Profile.MUTED_DARK)
                 .intoCallBack { palette ->
-                    val rgb = palette?.dominantSwatch?.rgb
+                    val rgb = palette?.getMutedColor(Color.GRAY)
                     if (rgb != null) {
                         paletteCard.setCardBackgroundColor(rgb)
                     }
@@ -90,14 +91,15 @@ fun loadImageAndCardColor(view: ImageView, url: String, paletteCard: CardView) {
         .load(drawableUrl)
         .listener(
             GlidePalette.with(drawableUrl)
-                .use(BitmapPalette.Profile.MUTED_DARK)
+                .use(BitmapPalette.Profile.MUTED)
                 .intoCallBack { palette ->
-                    val rgb = palette?.dominantSwatch?.rgb
+                    val rgb = palette?.getMutedColor(Color.GRAY)
                     if (rgb != null) {
                         paletteCard.setCardBackgroundColor(rgb)
                     }
                 }.crossfade(true)
-        ).into(view)
+        ).centerCrop()
+        .into(view)
 }
 
 @BindingAdapter(
@@ -119,7 +121,7 @@ fun loadImagePokemon(
             GlidePalette.with(drawable)
                 .use(BitmapPalette.Profile.MUTED_DARK)
                 .intoCallBack { palette ->
-                    val rgb = palette?.dominantSwatch?.rgb
+                    val rgb = palette?.getMutedColor(Color.GRAY)
                     if (rgb != null) {
                         appBar.setBackgroundColor(rgb)
                         collapsingToolbar.setBackgroundColor(rgb)

@@ -13,6 +13,7 @@
             type="boolean" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:theme="@style/Theme.AppCompat.DayNight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false">
@@ -86,7 +87,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
-                            android:layout_centerInParent="true">
+                            android:layout_toEndOf="@id/back_Button"
+                            android:layout_toStartOf="@id/favorite_Button"
+                            android:gravity="center">
 
                             <TextView
                                 android:id="@+id/textViewName"
@@ -94,6 +97,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{viewmodel.pokemonDetailsData.name}"
                                 android:textColor="@color/white"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="center_vertical"
                                 android:textSize="28sp"
                                 android:textAllCaps="true"
                                 android:textStyle="bold"
@@ -145,13 +150,12 @@
                 </LinearLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
+            android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"

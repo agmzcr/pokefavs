@@ -93,6 +93,19 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesListAd
     private fun setupObserver() {
         viewModel.favoritesList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            checkEmpty()
+        }
+    }
+
+    private fun checkEmpty() {
+        binding.apply {
+            if (adapter.itemCount == 0) {
+                imageEmpty.visibility = View.VISIBLE
+                textEmpty.visibility = View.VISIBLE
+            } else {
+                imageEmpty.visibility = View.GONE
+                textEmpty.visibility = View.GONE
+            }
         }
     }
 
@@ -120,9 +133,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesListAd
                 viewModel.deletePokemon(pokemon.id!!)
                 view?.let {
                     Snackbar.make(it, "Pokemon deleted", Snackbar.LENGTH_LONG).apply {
-                        setBackgroundTint(resources.getColor(R.color.white))
-                        setTextColor(resources.getColor(R.color.grey_900))
-                        setActionTextColor(resources.getColor(R.color.poke_red))
                         setAction("Undo") {
                             viewModel.undoDeletion(pokemon)
                         }.show()

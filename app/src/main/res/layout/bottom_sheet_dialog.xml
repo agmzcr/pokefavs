@@ -28,7 +28,7 @@
                 android:layout_height="24dp"
                 android:visibility="invisible"
                 android:src="@drawable/ic_done"
-                app:tint="@color/poke_red"/>
+                app:tint="@color/hp_color"/>
 
             <TextView
                 android:id="@+id/alphaTextDialog"
@@ -50,7 +50,7 @@
                 android:layout_height="24dp"
                 android:visibility="visible"
                 android:src="@drawable/ic_done"
-                app:tint="@color/poke_red"/>
+                app:tint="@color/hp_color"/>
 
             <TextView
                 android:id="@+id/idTextDialog"
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="0dp"
-            android:backgroundTint="@color/poke_red"
+            android:backgroundTint="@color/hp_color"
             android:layout_margin="10dp"
             android:text="Done" />
 

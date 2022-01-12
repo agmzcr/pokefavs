@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PokeFavs" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.PokeFavs" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,11 +14,29 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="actionBarTheme">@style/MyActionBarStyle</item>
+        <item name="snackbarStyle">@style/MySnackbarStyle</item>
+        <item name="snackbarTextViewStyle">@style/MySnackbarTextViewStyle</item>
+        <item name="snackbarButtonStyle">@style/MySnackbarButtonStyle</item>
     </style>
 
-    <style name="MyActionBarStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="MyActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:textColor">@color/grey_900</item>
         <item name="android:background">@color/white</item>
+        <item name="android:iconTint" tools:targetApi="o">@color/grey_900</item>
+    </style>
+
+    <style name="MySnackbarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/grey_900</item>
+        <item name="actionTextColorAlpha">1</item>
+    </style>
+
+    <style name="MySnackbarButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">@color/atk_color</item>
+    </style>
+
+    <style name="MySnackbarTextViewStyle" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/grey_900</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
@@ -28,17 +46,17 @@
         <item name="postSplashScreenTheme">@style/Theme.PokeFavs</item>
     </style>
 
-    <style name="Pokedex">
+    <style name="Pokedex" parent="Theme.MaterialComponents.DayNight">
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="BottomNavigation" parent="Widget.MaterialComponents.BottomAppBar">
+    <style name="BottomNavigation" parent="Widget.Design.BottomNavigationView">
         <item name="android:background">@color/white</item>
         <item name="itemIconTint">@drawable/bottom_navigation_colors</item>
         <item name="itemTextColor">@drawable/bottom_navigation_colors</item>
     </style>
 
-    <style name="collapsingToolbar">
+    <style name="collapsingToolbar" parent="Widget.Design.CollapsingToolbar">
         <item name="contentScrim">@color/white</item>
         <item name="android:background">@color/white</item>
     </style>
@@ -47,7 +65,11 @@
         <item name="tint">@color/white</item>
     </color>
 
-    <style name="tabsLayout" parent="Widget.MaterialComponents.TabLayout.PrimarySurface">
+    <style name="ContentLoadingProgress">
+        <item name="colorAccent">@color/grey_900</item>
+    </style>
+
+    <style name="tabsLayout" parent="Widget.Design.TabLayout">>
         <item name="android:background">@color/white</item>
         <item name="tabTextColor">@color/grey_400</item>
         <item name="android:elevation">10dp</item>
@@ -55,7 +77,7 @@
         <item name="tabIndicatorColor">@color/black</item>
     </style>
 
-    <style name="TextStyle">
+    <style name="TextStyle" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -67,7 +89,7 @@
     </style>
 
     <style name="ImageBackgroundCard">
-        <item name="android:alpha">0.20</item>
+        <item name="android:alpha">0.1</item>
         <item name="android:src">@drawable/ic_pokeball</item>
         <item name="tint">@color/black</item>
     </style>

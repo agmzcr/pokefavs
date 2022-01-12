@@ -4,7 +4,6 @@
 
     <item
         android:id="@+id/search_Button"
-        android:iconTint="@color/poke_red"
         android:icon="@drawable/ic_search"
         android:title="Search pokemon by name"
         app:actionViewClass="androidx.appcompat.widget.SearchView"

@@ -10,19 +10,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/Pokedex"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".ui.favorites.FavoritesFragment">
 
-
-        <!--<ImageView
-            android:id="@+id/pikachu_Backgraound"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imageEmpty"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:visibility="gone"
             android:src="@drawable/ic_pikachu"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>-->
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/textEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Favorites list is empty"
+            android:textSize="21sp"
+            android:textColor="@color/grey_900"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageEmpty"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorite_Recycler_View"

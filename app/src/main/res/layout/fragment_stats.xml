@@ -58,7 +58,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.stats[0].base_stat}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/hp_color"/>
             </LinearLayout>
 
             <LinearLayout
@@ -94,7 +94,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.stats[0].base_stat}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/atk_color"/>
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +130,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.stats[2].base_stat}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/def_color"/>
             </LinearLayout>
 
             <LinearLayout
@@ -166,7 +166,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.stats[3].base_stat}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/sp_atk_color"/>
             </LinearLayout>
 
             <LinearLayout
@@ -202,7 +202,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.stats[4].base_stat}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/sp_def_color"/>
             </LinearLayout>
 
             <LinearLayout
@@ -238,7 +238,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.stats[5].base_stat}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/spd_color"/>
             </LinearLayout>
 
             <LinearLayout
@@ -274,7 +274,7 @@
                     android:indeterminate="false"
                     android:max="200"
                     android:progress="@{vm.pokemonDetailsData2.base_experience}"
-                    android:progressTint="@color/poke_red"/>
+                    android:progressTint="@color/exp_color"/>
             </LinearLayout>
         </LinearLayout>
 
