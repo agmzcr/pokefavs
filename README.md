@@ -4,7 +4,7 @@ _I am current developer student and I developing this app for learning and prati
 ## Light Theme
 | Pokedex      | Details/About      | Details/Stats | Details/Evolutions | Favorites  |
 |------------|-------------|------------|-------------|------------|
-| <img src="screenshots/Screenshot_Day1.png" width="250"> | <img src="screenshots/Screenshot_Day2.png" width="250"> | <img src="screenshots/Screenshot_Day3.png"> | <img src="screenshots/Screenshot_Day4.png"> | <img src="screenshots/Screenshot_Day5.png"> |
+| <img src="screenshots/Screenshot_Day1.png" width="500"> | <img src="screenshots/Screenshot_Day2.png" width="500"> | <img src="screenshots/Screenshot_Day3.png"> | <img src="screenshots/Screenshot_Day4.png"> | <img src="screenshots/Screenshot_Day5.png"> |
 
 ## Dark Theme
 | Pokedex      | Details/About      | Details/Stats | Details/Evolutions | Favorites  |
