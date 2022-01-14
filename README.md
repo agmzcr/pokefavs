@@ -1,8 +1,18 @@
 # PokeFavs
 _I am current developer student and I developing this app for learning and pratice. Is Pokedex app where you can save you favorites pokemons_
 
+## Light Theme
+|Pokedex|Details/About|Details/Stats|Details/Evolutions|Favorites|
+|------------|-------------|------------|-------------|------------|
+| <img src="screenshots/Screenshot_Day1.png"> | <img src="screenshots/Screenshot_Day2.png"> | <img src="screenshots/Screenshot_Day3.png"> | <img src="screenshots/Screenshot_Day4.png"> | <img src="screenshots/Screenshot_Day5.png"> |
+
+## Dark Theme
+| Pokedex      | Details/About      | Details/Stats | Details/Evolutions | Favorites  |
+|------------|-------------|------------|-------------|------------|
+| <img src="screenshots/Screenshot_Night1.png"> | <img src="screenshots/Screenshot_Night2.png"> | <img src="screenshots/Screenshot_Night3.png"> | <img src="screenshots/Screenshot_Night4.png"> | <img src="screenshots/Screenshot_Night5.png"> |
+
 ## Built with 🛠️
-_I used this:_
+_I used:_
 
 * [Kotlin](https://kotlinlang.org/) - 100% write on Kotlin
 * [PókeApi](https://pokeapi.co/) - Here I take the data of pokemons
