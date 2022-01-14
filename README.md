@@ -1,4 +1,4 @@
-# PokeFavs
+# PokéFavs
 _I am current developer student and I developing this app for learning and pratice. Is Pokedex app where you can save you favorites pokemons_
 
 ## Light Theme
@@ -15,13 +15,13 @@ _I am current developer student and I developing this app for learning and prati
 _I used:_
 
 * [Kotlin](https://kotlinlang.org/) - 100% write on Kotlin
-* [PókeApi](https://pokeapi.co/) - Here I take the data of pokemons
+* [PokéApi](https://pokeapi.co/) - Here I take the data of pokemons
 * [Retrofit](https://square.github.io/retrofit/)
 * [Glide](https://github.com/bumptech/glide)
 * [OkHttp](https://square.github.io/okhttp/recipes/)
 * [Jetpack](https://developer.android.com/jetpack)
 * [Databinding](https://developer.android.com/topic/libraries/data-binding)
-* [Paging](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+* [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata?hl=en)
 * [Coroutines](https://developer.android.com/kotlin/coroutines?gclid=CjwKCAiA24SPBhB0EiwAjBgkhnahOjTp9yMMZQzzLzeBydCo2xiD8kzgTNFnJD7aXCuKH9jY6VOmZxoCsPcQAvD_BwE&gclsrc=aw.ds)
 * [Flow](https://developer.android.com/kotlin/flow)
