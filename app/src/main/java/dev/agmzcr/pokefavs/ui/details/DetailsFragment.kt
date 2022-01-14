@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import dev.agmzcr.pokefavs.R
@@ -49,7 +52,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 val pokemonToJson = Gson().toJson(it)
                 Log.i("pokemonJson2", pokemonToJson)
 
-                setupPager(pokemonToJson)
+                setupViewPager(pokemonToJson)
             }
         })
     }
@@ -78,9 +81,13 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
     }
 
-    private fun setupPager(pokemonJson: String) {
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = ViewPagerAdapter(requireContext(), childFragmentManager, pokemonJson)
-        binding.tabsLayout.setupWithViewPager(viewPager)
+    private fun setupViewPager(pokemonJson: String) {
+        val viewPager: ViewPager2 = binding.viewPager
+        val viewPagerAdapter = ViewPagerAdapter(requireContext(), childFragmentManager, lifecycle, pokemonJson)
+        viewPager.adapter = viewPagerAdapter
+        val tabs: TabLayout = binding.tabsLayout
+        TabLayoutMediator(tabs, viewPager){tab, position ->
+            tab.text = viewPagerAdapter.pages[position].title
+        }.attach()
     }
 }

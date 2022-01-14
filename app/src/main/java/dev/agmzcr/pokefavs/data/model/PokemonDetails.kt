@@ -21,4 +21,5 @@ data class PokemonDetails(
     var genera: String? = null,
     var habitat: String? = null,
     var evolutions: List<PokemonEvolutions>? =  null,
-) : Serializable
+    var weaknesses: List<String>? = null
+): Serializable

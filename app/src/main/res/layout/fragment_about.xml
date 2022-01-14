@@ -131,6 +131,16 @@
                 android:textSize="14sp"
                 android:text="Base Happiness"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/weaknesses_Text"
+                style="@style/TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="Weaknesses"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -156,7 +166,7 @@
                     android:id="@+id/viewType2"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="3dp"
                     app:typeImage="@{vm.pokemonDetailsData2.types[1].type.name}" />
             </LinearLayout>
 
@@ -257,6 +267,15 @@
                 android:textSize="14sp"
                 android:text="@{String.valueOf(vm.pokemonDetailsData2.base_happiness)}"
                 tools:text="Test" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/weaknesses_Recycler_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/type_list_item" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

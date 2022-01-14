@@ -61,12 +61,18 @@ dependencies {
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.4.0")
 
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    implementation 'androidx.lifecycle:lifecycle-common:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
 
     // Paging
     implementation("androidx.paging:paging-runtime-ktx:3.1.0")
+
+    // ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     // CardView
     implementation("androidx.cardview:cardview:1.0.0")
@@ -75,8 +81,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-rc01")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.0-rc01")
 
     // SwipeRefresh
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")

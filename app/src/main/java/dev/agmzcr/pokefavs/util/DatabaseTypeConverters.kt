@@ -25,4 +25,8 @@ class DatabaseTypeConverters {
     fun ablitiesJsonToList(value: String) =
         Gson().fromJson(value, Array<PokemonAbilities>::class.java).toList()
 
+    @TypeConverter
+    fun weaknessesJsonToList(value: String) =
+        Gson().fromJson(value, Array<String>::class.java).toList()
+
 }

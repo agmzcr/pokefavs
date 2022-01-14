@@ -144,7 +144,7 @@ fun ImageView.setIcon(data: String?) {
     if (data != null) {
         var typeId = R.drawable.ic_bug_type_icon
         data.let {
-            val item = data
+            val item = it
             typeId = item.asResourceId()
         }
         setImageResource(typeId)

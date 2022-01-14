@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.databinding.FragmentAboutBinding
 import dev.agmzcr.pokefavs.ui.details.DetailsViewModel
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AboutFragment : Fragment(R.layout.fragment_about) {
@@ -27,7 +30,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
     private lateinit var binding: FragmentAboutBinding
     private val viewModel: DetailsViewModel by activityViewModels()
-    private var pokemonModel = PokemonDetails()
+    private val adapter = WeaknessesListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +48,22 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
             lifecycleOwner = viewLifecycleOwner
             vm = viewModel
         }
-
+        setupRecyclerView()
         if (pokemon != null) {
             viewModel.getDataViewPager(jsonToPokemon)
+            viewModel.pokemonDetailsData2.observe(this, {
+                adapter.submitList(it.weaknesses)
+                Log.i("showlist", it.weaknesses.toString())
+            })
         } else {
             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.apply {
+            weaknessesRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            weaknessesRecyclerView.adapter = adapter
         }
     }
 }

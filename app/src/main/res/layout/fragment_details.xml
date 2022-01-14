@@ -124,29 +124,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical">
+
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabsLayout"
                         style="@style/tabsLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:tabGravity="fill"
-                        app:tabMode="fixed">
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="About" />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Stats" />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Evolution" />
-                    </com.google.android.material.tabs.TabLayout>
+                        app:tabMode="fixed" />
                 </LinearLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -156,7 +141,8 @@
             android:fillViewport="true"
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <androidx.viewpager.widget.ViewPager
+
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

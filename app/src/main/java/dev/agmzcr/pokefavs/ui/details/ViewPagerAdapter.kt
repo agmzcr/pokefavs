@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.ui.details.about.AboutFragment
 import dev.agmzcr.pokefavs.ui.details.evolution.EvolutionFragment
@@ -12,16 +14,16 @@ import dev.agmzcr.pokefavs.ui.details.stats.StatsFragment
 
 class ViewPagerAdapter(
     private val context: Context,
-    fragmentManager: FragmentManager,
+    fm: FragmentManager,
+    lifecycle: Lifecycle,
     private val pokemon: String
-) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+): FragmentStateAdapter(fm, lifecycle) {
 
     data class Page(val title: String, val ctor: () -> Fragment)
 
-    override fun getCount() = 3
+    override fun getItemCount() = 3
 
-    @Suppress("MoveLambdaOutsideParentheses")
-    private val pages = listOf(
+    val pages = listOf(
         Page(
             "About",
             { AboutFragment.newInstance(pokemon) }
@@ -31,19 +33,12 @@ class ViewPagerAdapter(
             { StatsFragment.newInstance(pokemon) }
         ),
         Page(
-            "Evolution",
+            "Evolutions",
             { EvolutionFragment.newInstance(pokemon) }
         )
     )
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return pages[position].ctor()
-    }
-
-    override fun getPageTitle(position: Int): CharSequence = when(position) {
-        0 -> "About"
-        1 -> "Stats"
-        2 -> "Evolution"
-        else -> throw IllegalStateException("Unexpected position $position")
     }
 }
