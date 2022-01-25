@@ -14,8 +14,11 @@ interface FavoritesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(pokemon: PokemonDetails): Long
 
-    @Query("SELECT * FROM favorites")
-    fun getAllSavedPokemon(): LiveData<List<PokemonDetails>>
+    @Query("SELECT * FROM favorites ORDER BY id")
+    fun getAllSavedPokemonByIds(): LiveData<List<PokemonDetails>>
+
+    @Query("SELECT * FROM favorites ORDER BY name")
+    fun getAllSavedPokemonOrderByNames(): LiveData<List<PokemonDetails>>
 
     @Query("SELECT * FROM favorites WHERE id LIKE :id")
     suspend fun getSavedPokemonById(id: Int) : PokemonDetails

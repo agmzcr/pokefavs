@@ -2,6 +2,7 @@ package dev.agmzcr.pokefavs.ui.favorites
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -22,13 +23,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.databinding.FragmentFavoritesBinding
+import dev.agmzcr.pokefavs.util.Filters
 
 @AndroidEntryPoint
-class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesListAdapter.ClickListener {
+class FavoritesFragment : Fragment(R.layout.fragment_favorites),
+    FavoritesListAdapter.ClickListener,
+    FilterDialogFragment.FilterListener {
 
     private lateinit var binding: FragmentFavoritesBinding
     private val adapter =  FavoritesListAdapter(this)
     private val viewModel: FavoritesViewModel by viewModels()
+    private lateinit var filterDialog: FilterDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
@@ -38,12 +43,12 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesListAd
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
+        filterDialog = FilterDialogFragment()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
         }
 
         setupRecyclerView()
-        setupObserver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,43 +60,22 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesListAd
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.short_Button -> {
-                val dialog = BottomSheetDialog(context!!)
-                val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
-                dialog.setCancelable(true)
-                dialog.setContentView(view)
-                dialog.show()
-                val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
-                val doneAlpha = view.findViewById<ImageView>(R.id.doneAlphabetically)
-                val doneId = view.findViewById<ImageView>(R.id.doneId)
-                val textAlpha = view.findViewById<TextView>(R.id.alphaTextDialog)
-                val textId = view.findViewById<TextView>(R.id.idTextDialog)
-                textId.setOnClickListener {
-                    doneId.visibility = View.VISIBLE
-                    doneAlpha.visibility = View.INVISIBLE
-                }
-
-                textAlpha.setOnClickListener {
-                    doneAlpha.visibility = View.VISIBLE
-                    doneId.visibility = View.INVISIBLE
-                }
-                btnClose.setOnClickListener {
-                    if (doneId.visibility == View.VISIBLE) {
-                        val filterList = adapter.currentList.sortedBy { it.id }
-                        adapter.submitList(filterList)
-                    }else {
-                        val filterList = adapter.currentList.sortedBy { it.name }
-                        adapter.submitList(filterList)
-                    }
-                    dialog.dismiss()
-                }
+                filterDialog.show(childFragmentManager, "Filters")
             }
         }
         return super.onOptionsItemSelected(item)
 
     }
 
-    private fun setupObserver() {
+    private fun setupObserverByIds() {
         viewModel.favoritesList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+            checkEmpty()
+        }
+    }
+
+    private fun setupObserverByNames() {
+        viewModel.favoritesListOrderByNames.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             checkEmpty()
         }
@@ -150,6 +134,22 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavoritesListAd
             pokemonName = pokemon.name!!
         )
         view?.findNavController()?.navigate(action)
+    }
+
+    override fun onFilter(filters: Filters) {
+
+        if (filters.sortBy == "number") {
+            setupObserverByIds()
+        } else {
+            setupObserverByNames()
+        }
+
+        viewModel.filters = filters
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onFilter(viewModel.filters)
     }
 
 }

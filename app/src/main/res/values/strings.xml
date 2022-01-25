@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">PokeFavs</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit lectus nulla, ac viverra metus euismod eget. Phasellus efficitur et diam ultricies dictum. Ut ornare eros ac dolor tempor, sed tincidunt eros sodales. Aenean nec risus sed sem fermentum hendrerit. Maecenas placerat tempus augue ac venenatis. In varius a turpis a blandit. Curabitur id neque nulla. Morbi bibendum, leo ac congue auctor, enim quam lacinia ligula, ac dapibus nisi ligula vitae dui. Quisque eget faucibus mauris.
 
-Nullam quis fringilla justo, eget pharetra ex. Praesent id mauris urna. Ut finibus elementum risus, sed semper sapien molestie at. Nam luctus ligula ex. Nulla enim ex, suscipit ut leo et, iaculis facilisis lorem. Curabitur viverra rhoncus risus. Cras elit magna, laoreet ac dolor et, vulputate porttitor magna. Vivamus et eleifend metus. Fusce eu dapibus tellus. Proin molestie sapien eu arcu finibus varius. Donec ac lacus rutrum, convallis urna nec, posuere tellus. Nullam semper nulla sit amet arcu ornare, eu pulvinar neque consectetur. In hendrerit varius euismod. Nullam laoreet magna vel est convallis tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+    <string name="sort_by_number">Sort by Numbers</string>
+    <string name="sort_by_name">Sort by Names</string>
 
-In ut dapibus sem, nec iaculis urna. Sed ut felis vel enim faucibus luctus. Curabitur sed metus viverra, viverra tortor in, feugiat libero. Donec at orci ut dolor commodo aliquam vitae sed quam. Suspendisse fermentum sit amet felis a varius. Proin posuere nisl et elementum cursus. Nunc ac suscipit sem, id luctus tellus. Suspendisse et erat sit amet justo commodo ullamcorper at ac lacus. Vivamus luctus molestie turpis. Ut quis libero ultricies, porta erat sit amet, aliquet justo. Ut rutrum a diam eu malesuada.
+    <string name="sorted_by_number">Sorted by numbers</string>
+    <string name="sorted_by_name">Sorted by names</string>
 
-Integer quis nibh cursus dui pharetra dignissim. Nullam vitae odio mollis, consequat tellus in, auctor felis. Nulla sit amet orci enim. Quisque eget consectetur lacus, malesuada finibus lacus. Nulla nec velit tellus. Proin molestie quam in urna fermentum venenatis a quis elit. Nulla ultrices turpis et neque feugiat, non auctor lacus ultricies.
-
-Praesent massa augue, volutpat nec placerat eget, posuere eu diam. Proin elementum enim sed blandit blandit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse lacinia sapien at commodo semper. Praesent faucibus finibus facilisis. Vestibulum sit amet porttitor arcu. Mauris id pharetra tellus. Aenean enim nisl, dignissim vel consequat quis, vestibulum a sem.</string>
+    <string-array name="sort_by">
+        <item>@string/sort_by_number</item>
+        <item>@string/sort_by_name</item>
+    </string-array>
 </resources>

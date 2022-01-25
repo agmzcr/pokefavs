@@ -46,8 +46,7 @@ class PokemonRepository @Inject constructor(
             val flavorTextList = species.flavor_text_entries
             if (flavorTextList != null) {
                 for (flavorText in flavorTextList) {
-                    if (flavorText.language?.name.equals("en") &&
-                        flavorText.version?.name.equals("black-2")) {
+                    if (flavorText.language?.name.equals("en")) {
                     pokemon.description = flavorText.flavor_text?.replace("\n", " ")
                     break
                     }
@@ -137,9 +136,6 @@ class PokemonRepository @Inject constructor(
                             if (evolutionChain2.evolves_to != null) {
                             list.add(Pair(evolutionChain2.species!!.url!!.extractPokemonIdFromUrlSpecies(), evolutionChain2.species.name!!))
                         } else {
-                            evolutionChain.evolves_to!!.forEach { _ ->
-                                //TODO
-                            }
                             break
                         }
                     }
@@ -163,7 +159,10 @@ class PokemonRepository @Inject constructor(
     }
 
     fun getAllSavedPokemon(): LiveData<List<PokemonDetails>> =
-        db.favoritesDao().getAllSavedPokemon()
+        db.favoritesDao().getAllSavedPokemonByIds()
+
+    fun getAllSavedPokemonOrderByNames(): LiveData<List<PokemonDetails>> =
+        db.favoritesDao().getAllSavedPokemonOrderByNames()
 
     suspend fun getSavedPokemonById(id: Int) =
         db.favoritesDao().getSavedPokemonById(id)
