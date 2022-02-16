@@ -47,7 +47,7 @@ Basic MVVM architecture with repository.
 * [Douglas Fornaro from dev.to](https://dev.to/douglascf/definitive-guide-to-paging-3-2nh4) - Tutorial helped me to understan the component Paging 3.
 
 ## License
-Designed and developed by 2020 agmzcr (Armando Gómez)
+Designed and developed by 2021 agmzcr (Armando Gómez)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
