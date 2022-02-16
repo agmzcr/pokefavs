@@ -20,36 +20,18 @@ class Connection(val context: Context) : LiveData<Boolean>(){
 
     var  intentFilter = IntentFilter(CONNECTIVITY_ACTION)
     private var  connectivityManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-    private lateinit var networkCallback : NetworkCallback
-
-    init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            networkCallback = NetworkCallback(this)
-        }
-    }
+    private var networkCallback : NetworkCallback = NetworkCallback(this)
 
     override fun onActive() {
         super.onActive()
         updateConnection()
-        when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> connectivityManager.registerDefaultNetworkCallback(networkCallback)
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
-                val builder = NetworkRequest.Builder().addTransportType(TRANSPORT_CELLULAR).addTransportType(TRANSPORT_WIFI)
-                connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
-            }
-            else -> {
-                context.registerReceiver(networkReceiver, intentFilter)
-            }
-        }
+        val builder = NetworkRequest.Builder().addTransportType(TRANSPORT_CELLULAR).addTransportType(TRANSPORT_WIFI)
+        connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
     }
 
     override fun onInactive() {
         super.onInactive()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            connectivityManager.unregisterNetworkCallback(networkCallback)
-        } else{
-            context.unregisterReceiver(networkReceiver)
-        }
+        connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 
 

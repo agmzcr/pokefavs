@@ -18,7 +18,7 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filters:"
+            android:text="Filter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,15 +29,13 @@
             app:layout_constraintBottom_toBottomOf="@+id/spinnerSort"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/spinnerSort"
-            app:srcCompat="@drawable/ic_filter_list"
-            app:tint="@color/black" />
+            app:srcCompat="@drawable/ic_filter_list" />
 
         <Spinner
             android:id="@+id/spinnerSort"
             style="@style/FilterSpinner"
             android:layout_width="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:entries="@array/sort_by"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,25 +56,23 @@
 
         <Button
             android:id="@+id/buttonCancel"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            style="@style/CancelFilterBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:textColor="@color/black"
-            android:theme="@style/Widget.AppCompat.Button.Borderless"
-            app:layout_constraintEnd_toStartOf="@+id/buttonSearch"
+            android:text="Cancel"
+            app:layout_constraintEnd_toStartOf="@+id/buttonFilter"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/buttonSearch" />
+            app:layout_constraintTop_toTopOf="@+id/buttonFilter" />
 
 
         <Button
-            android:id="@+id/buttonSearch"
+            android:id="@+id/buttonFilter"
+            style="@style/ApplyFilterBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Filtar"
-            android:theme="@style/Widget.AppCompat.Button"
+            android:text="Apply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/buttonCancel"

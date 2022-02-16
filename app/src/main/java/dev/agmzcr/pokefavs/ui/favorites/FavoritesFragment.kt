@@ -12,7 +12,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +26,8 @@ import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.databinding.FragmentFavoritesBinding
 import dev.agmzcr.pokefavs.util.Filters
+import dev.agmzcr.pokefavs.util.UIState
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(R.layout.fragment_favorites),
@@ -45,9 +49,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
         binding = FragmentFavoritesBinding.bind(view)
         filterDialog = FilterDialogFragment()
         binding.apply {
+            vm = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
-
         setupRecyclerView()
     }
 
@@ -68,16 +72,38 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
     }
 
     private fun setupObserverByIds() {
-        viewModel.favoritesList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            checkEmpty()
+        viewModel.favoritesListOrderByIds()
+        viewModel.favoritesList.observe(viewLifecycleOwner) { list ->
+            when(list) {
+                is UIState.Loading -> {}
+                is UIState.Success<*> -> {
+                    adapter.submitList(list.content as MutableList<PokemonDetails>?)
+                    checkEmpty()
+                }
+                is UIState.Error -> {
+                    Toast.makeText(context, list.errorMessage, Toast.LENGTH_SHORT).show()
+                    Log.e("FavoritesFrament", list.errorMessage!!)
+                }
+                else -> {}
+            }
         }
     }
 
     private fun setupObserverByNames() {
-        viewModel.favoritesListOrderByNames.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            checkEmpty()
+        viewModel.favoritesListOrderByNames()
+        viewModel.favoritesList.observe(viewLifecycleOwner) { list ->
+            when(list) {
+                is UIState.Loading -> {}
+                is UIState.Success<*> -> {
+                    adapter.submitList(list.content as MutableList<PokemonDetails>?)
+                    checkEmpty()
+                }
+                is UIState.Error -> {
+                    Toast.makeText(context, list.errorMessage, Toast.LENGTH_SHORT).show()
+                    Log.e("FavoritesFrament", list.errorMessage!!)
+                }
+                else -> {}
+            }
         }
     }
 
@@ -138,18 +164,23 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
 
     override fun onFilter(filters: Filters) {
 
-        if (filters.sortBy == "number") {
+        if (filters.sortBy == 0) {
             setupObserverByIds()
         } else {
             setupObserverByNames()
         }
 
-        viewModel.filters = filters
+        viewModel.setFilters(filters)
+        viewModel.filtersDefault = filters
     }
 
     override fun onStart() {
         super.onStart()
-        onFilter(viewModel.filters)
+        if (viewModel.getFilters()?.sortBy == null) {
+            onFilter(viewModel.filtersDefault)
+        } else {
+            onFilter(viewModel.getFilters()!!)
+        }
     }
 
 }

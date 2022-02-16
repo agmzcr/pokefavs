@@ -23,7 +23,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:layout_marginHorizontal="10dp"
-            android:text="@{vm.pokemonDetailsData2.description}"
+            android:text="@{vm.pokemonDetailsData.description}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -160,14 +160,14 @@
                     android:id="@+id/viewType1"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    app:typeImage="@{vm.pokemonDetailsData2.types[0].type.name}" />
+                    app:typeImage="@{vm.pokemonDetailsData.types[0].type.name}" />
 
                 <ImageView
                     android:id="@+id/viewType2"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="3dp"
-                    app:typeImage="@{vm.pokemonDetailsData2.types[1].type.name}" />
+                    app:typeImage="@{vm.pokemonDetailsData.types[1].type.name}" />
             </LinearLayout>
 
             <TextView
@@ -177,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                app:capitalizeFormatter="@{vm.pokemonDetailsData2.genera}"
+                app:capitalizeFormatter="@{vm.pokemonDetailsData.genera}"
                 tools:text="Test" />
 
             <TextView
@@ -187,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                app:heightFormatter="@{vm.pokemonDetailsData2.height}"
+                app:heightFormatter="@{vm.pokemonDetailsData.height}"
                 tools:text="Test" />
 
             <TextView
@@ -197,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                app:weightFormatter="@{vm.pokemonDetailsData2.weight}"
+                app:weightFormatter="@{vm.pokemonDetailsData.weight}"
                 tools:text="Test" />
 
             <TextView
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                app:capitalizeFormatter="@{vm.pokemonDetailsData2.habitat}"
+                app:capitalizeFormatter="@{vm.pokemonDetailsData.habitat}"
                 tools:text="Test" />
 
             <LinearLayout
@@ -221,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                app:capitalizeFormatter="@{vm.pokemonDetailsData2.abilities[0].ability.name}"
+                app:capitalizeFormatter="@{vm.pokemonDetailsData.abilities[0].ability.name}"
                 tools:text="Test" />
 
                 <TextView
@@ -232,7 +232,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:textSize="14sp"
-                    app:capitalizeFormatter="@{vm.pokemonDetailsData2.abilities[1].ability.name}"
+                    app:capitalizeFormatter="@{vm.pokemonDetailsData.abilities[1].ability.name}"
                     tools:text="Test" />
 
                 <TextView
@@ -243,7 +243,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:textSize="14sp"
-                    app:capitalizeFormatter="@{vm.pokemonDetailsData2.abilities[2].ability.name}"
+                    app:capitalizeFormatter="@{vm.pokemonDetailsData.abilities[2].ability.name}"
                     tools:text="Test" />
 
             </LinearLayout>
@@ -255,7 +255,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                app:captureRateFormatter="@{vm.pokemonDetailsData2.capture_rate}"
+                app:captureRateFormatter="@{vm.pokemonDetailsData.capture_rate}"
                 tools:text="Test" />
 
             <TextView
@@ -265,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                android:text="@{String.valueOf(vm.pokemonDetailsData2.base_happiness)}"
+                android:text="@{String.valueOf(vm.pokemonDetailsData.base_happiness)}"
                 tools:text="Test" />
 
             <androidx.recyclerview.widget.RecyclerView

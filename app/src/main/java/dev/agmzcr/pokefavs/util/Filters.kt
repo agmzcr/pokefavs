@@ -2,22 +2,17 @@ package dev.agmzcr.pokefavs.util
 
 import android.text.TextUtils
 
-class Filters {
+data class Filters(
+    var sortBy: Int? = null
+) {
 
     companion object {
-
         val default: Filters
             get() {
                 val filters = Filters()
-                filters.sortBy = "number"
+                filters.sortBy = 0
 
                 return filters
             }
-    }
-
-    var sortBy: String? = null
-
-    fun hasSortBy(): Boolean {
-        return !TextUtils.isEmpty(sortBy)
     }
 }

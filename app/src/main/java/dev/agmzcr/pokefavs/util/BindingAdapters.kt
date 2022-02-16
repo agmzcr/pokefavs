@@ -3,7 +3,9 @@ package dev.agmzcr.pokefavs.util
 
 import android.graphics.Color
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
@@ -132,8 +134,6 @@ fun loadImagePokemon(
         ).into(view)
 }
 
-
-
 @BindingAdapter("pokemonId")
 fun TextView.setPokemonId(pokemonId: Int) {
     text = String.format("#%03d", pokemonId)
@@ -149,4 +149,20 @@ fun ImageView.setIcon(data: String?) {
         }
         setImageResource(typeId)
     }
+}
+
+@BindingAdapter("hideOnLoading")
+fun ViewGroup.hideOnLoading(responseState: UIState) {
+    visibility = if (responseState is UIState.Loading)
+        View.GONE
+    else
+        View.VISIBLE
+}
+
+@BindingAdapter("showOnLoading")
+fun ProgressBar.showOnLoading(responseState: UIState?) {
+    visibility = if (responseState is UIState.Loading)
+        View.VISIBLE
+    else
+        View.GONE
 }

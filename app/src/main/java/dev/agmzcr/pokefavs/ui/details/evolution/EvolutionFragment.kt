@@ -47,9 +47,11 @@ class EvolutionFragment : Fragment(R.layout.fragment_evolution) {
             vm = viewModel
         }
         setupRecyclerView()
-        viewModel.pokemonDetailsData2.observe(this, {
-            adapter.submitList(it.evolutions)
-        })
+        viewModel.pokemonDetailsData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it.evolutions)
+            }
+        }
     }
 
     private fun setupRecyclerView() {

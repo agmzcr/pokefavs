@@ -46,7 +46,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.stats[0].base_stat)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.stats[0].base_stat)}"
                     android:textSize="17sp" />
 
                 <ProgressBar
@@ -57,7 +57,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.stats[0].base_stat}"
+                    android:progress="@{vm.pokemonDetailsData.stats[0].base_stat}"
                     android:progressTint="@color/hp_color"/>
             </LinearLayout>
 
@@ -82,7 +82,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.stats[1].base_stat)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.stats[1].base_stat)}"
                     android:textSize="17sp" />
 
                 <ProgressBar
@@ -93,7 +93,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.stats[0].base_stat}"
+                    android:progress="@{vm.pokemonDetailsData.stats[0].base_stat}"
                     android:progressTint="@color/atk_color"/>
             </LinearLayout>
 
@@ -117,7 +117,7 @@
                     style="@style/TextStyle"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.stats[2].base_stat)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.stats[2].base_stat)}"
                     android:gravity="center"
                     android:textSize="17sp" />
 
@@ -129,7 +129,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.stats[2].base_stat}"
+                    android:progress="@{vm.pokemonDetailsData.stats[2].base_stat}"
                     android:progressTint="@color/def_color"/>
             </LinearLayout>
 
@@ -154,7 +154,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.stats[3].base_stat)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.stats[3].base_stat)}"
                     android:textSize="17sp" />
 
                 <ProgressBar
@@ -165,7 +165,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.stats[3].base_stat}"
+                    android:progress="@{vm.pokemonDetailsData.stats[3].base_stat}"
                     android:progressTint="@color/sp_atk_color"/>
             </LinearLayout>
 
@@ -190,7 +190,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.stats[4].base_stat)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.stats[4].base_stat)}"
                     android:textSize="17sp" />
 
                 <ProgressBar
@@ -201,7 +201,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.stats[4].base_stat}"
+                    android:progress="@{vm.pokemonDetailsData.stats[4].base_stat}"
                     android:progressTint="@color/sp_def_color"/>
             </LinearLayout>
 
@@ -226,7 +226,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.stats[5].base_stat)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.stats[5].base_stat)}"
                     android:textSize="17sp" />
 
                 <ProgressBar
@@ -237,7 +237,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.stats[5].base_stat}"
+                    android:progress="@{vm.pokemonDetailsData.stats[5].base_stat}"
                     android:progressTint="@color/spd_color"/>
             </LinearLayout>
 
@@ -262,7 +262,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{String.valueOf(vm.pokemonDetailsData2.base_experience)}"
+                    android:text="@{String.valueOf(vm.pokemonDetailsData.base_experience)}"
                     android:textSize="17sp" />
 
                 <ProgressBar
@@ -273,7 +273,7 @@
                     android:layout_weight="4"
                     android:indeterminate="false"
                     android:max="200"
-                    android:progress="@{vm.pokemonDetailsData2.base_experience}"
+                    android:progress="@{vm.pokemonDetailsData.base_experience}"
                     android:progressTint="@color/exp_color"/>
             </LinearLayout>
         </LinearLayout>

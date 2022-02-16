@@ -6,11 +6,14 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="vm"
             type="dev.agmzcr.pokefavs.ui.details.DetailsViewModel" />
         <variable
             name="isSaved"
             type="boolean" />
+        <variable
+            name="pokemon"
+            type="dev.agmzcr.pokefavs.data.model.PokemonDetails"/>
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:theme="@style/Theme.AppCompat.DayNight"
@@ -34,15 +37,40 @@
                 app:titleEnabled="false"
                 app:toolbarId="@+id/toolbar">
 
+                <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ContentLoadingProgress"
+                    style="?android:attr/progressBarStyle"
+                    app:showOnLoading="@{vm.state}"
+                    android:layout_gravity="center" />
+
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     android:layout_gravity="center"
-                    app:imagePokemon="@{viewmodel.pokemonDetailsData.id}"
+                    app:imagePokemon="@{pokemon.id}"
                     app:tabsColor="@{tabsLayout}"
                     app:appBarColor="@{appBar}"
                     app:collapsingToolbarColor="@{collapsingToolbar}"/>
+
+                <!--<TextView
+                    android:id="@+id/errorText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/grey_900"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    app:showOnError="@{vm.state}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>-->
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -95,7 +123,7 @@
                                 android:id="@+id/textViewName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{viewmodel.pokemonDetailsData.name}"
+                                android:text="@{pokemon.name}"
                                 android:textColor="@color/white"
                                 android:gravity="center_vertical"
                                 android:layout_gravity="center_vertical"
@@ -114,7 +142,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                app:pokemonId="@{viewmodel.pokemonDetailsData.id}"
+                                app:pokemonId="@{pokemon.id}"
                                 tools:text="#001"/>
                         </LinearLayout>
                     </RelativeLayout>

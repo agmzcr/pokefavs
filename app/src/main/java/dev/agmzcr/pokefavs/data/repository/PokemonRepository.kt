@@ -1,11 +1,8 @@
 package dev.agmzcr.pokefavs.data.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import dev.agmzcr.pokefavs.data.local.FavoritesDatabase
 import dev.agmzcr.pokefavs.data.model.*
 import dev.agmzcr.pokefavs.data.remote.PokeApi
@@ -85,33 +82,26 @@ class PokemonRepository @Inject constructor(
             for (type in firstType.double_damage_from) {
                 type.name?.let { listFirstTypeDouble.add(it) }
             }
-            Log.i("FIRSTTYPELIST", listFirstTypeDouble.toString())
 
             for (type in firstType.half_damage_from) {
                 type.name?.let { listFirstTypeHalf.add(it) }
             }
-            Log.i("FIRSTTYPELISTHALF", listFirstTypeHalf.toString())
         }
 
         if (secondType != null) {
             for (type in secondType.double_damage_from) {
                 type.name?.let { listSecondTypeDouble.add(it) }
             }
-            Log.i("SECONDTYPELIST", listSecondTypeDouble.toString())
 
             for (type in secondType.half_damage_from) {
                 type.name?.let { listSecondTypeHalf.add(it) }
             }
-            Log.i("SECONDTYPELISTHALF", listSecondTypeHalf.toString())
         }
 
         val listFilter = listFirstTypeDouble.toSet().minus(listSecondTypeHalf.toSet())
         val listFilter2 = listSecondTypeDouble.toSet().minus(listFirstTypeHalf.toSet())
 
         list.addAll(listFilter + listFilter2)
-        Log.i("FINISHLIST", list.toString())
-        //Log.i("FINISHLIST", listFilter.toString())
-        //Log.i("FINISHLIST2", listFilter2.toString())
 
         return list
     }
@@ -150,26 +140,24 @@ class PokemonRepository @Inject constructor(
     suspend fun insertPokemon(pokemon: PokemonDetails) =
         db.favoritesDao().insert(pokemon)
 
-    fun isPokemonSavedById(id : Int) : Boolean {
-        return db.favoritesDao().isPokemonSavedById(id)
-    }
+    suspend fun deletePokemon(id: Int) =
+        db.favoritesDao().delete(id)
 
-    fun isPokemonSavedByName(name: String) : Boolean {
-        return db.favoritesDao().isPokemonSavedByName(name)
-    }
+    fun isPokemonSavedById(id : Int): Boolean =
+        db.favoritesDao().isPokemonSavedById(id)
 
-    fun getAllSavedPokemon(): LiveData<List<PokemonDetails>> =
+    fun isPokemonSavedByName(name: String): Boolean =
+        db.favoritesDao().isPokemonSavedByName(name)
+
+    fun getAllSavedPokemonOrderByIds(): Flow<List<PokemonDetails>> =
         db.favoritesDao().getAllSavedPokemonByIds()
 
-    fun getAllSavedPokemonOrderByNames(): LiveData<List<PokemonDetails>> =
+    fun getAllSavedPokemonOrderByNames(): Flow<List<PokemonDetails>> =
         db.favoritesDao().getAllSavedPokemonOrderByNames()
 
-    suspend fun getSavedPokemonById(id: Int) =
+    fun getSavedPokemonById(id: Int) =
         db.favoritesDao().getSavedPokemonById(id)
 
-    suspend fun getSavedPokemonByName(name: String) =
+    fun getSavedPokemonByName(name: String) =
         db.favoritesDao().getSavedPokemonByName(name)
-
-    suspend fun deletePokemon(id: Int) =
-        db.favoritesDao().deletePokemon(id)
 }

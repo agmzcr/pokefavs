@@ -51,10 +51,12 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         setupRecyclerView()
         if (pokemon != null) {
             viewModel.getDataViewPager(jsonToPokemon)
-            viewModel.pokemonDetailsData2.observe(this, {
-                adapter.submitList(it.weaknesses)
-                Log.i("showlist", it.weaknesses.toString())
-            })
+            viewModel.pokemonDetailsData.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    adapter.submitList(it.weaknesses)
+                    Log.i("showlist", it.weaknesses.toString())
+                }
+            }
         } else {
             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
         }

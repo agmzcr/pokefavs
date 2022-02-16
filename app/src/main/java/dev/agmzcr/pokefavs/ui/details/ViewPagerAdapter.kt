@@ -25,17 +25,14 @@ class ViewPagerAdapter(
 
     val pages = listOf(
         Page(
-            "About",
-            { AboutFragment.newInstance(pokemon) }
-        ),
+            "About"
+        ) { AboutFragment.newInstance(pokemon) },
         Page(
-            "Stats",
-            { StatsFragment.newInstance(pokemon) }
-        ),
+            "Stats"
+        ) { StatsFragment.newInstance(pokemon) },
         Page(
-            "Evolutions",
-            { EvolutionFragment.newInstance(pokemon) }
-        )
+            "Evolutions"
+        ) { EvolutionFragment.newInstance(pokemon) }
     )
 
     override fun createFragment(position: Int): Fragment {

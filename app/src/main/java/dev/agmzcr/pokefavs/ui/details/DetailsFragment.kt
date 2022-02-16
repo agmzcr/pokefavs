@@ -15,7 +15,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import dev.agmzcr.pokefavs.R
+import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.databinding.FragmentDetailsBinding
+import dev.agmzcr.pokefavs.util.UIState
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -33,42 +36,60 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding = FragmentDetailsBinding.bind(view)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewmodel = viewModel
+            vm = viewModel
         }
         setupObserver()
         setupBackButton()
-        setupFavoriteButton()
     }
 
     private fun setupObserver() {
-        viewModel.isSaved.observe(this, {
+        viewModel.isSaved.observe(viewLifecycleOwner) {
             if (it) {
                 binding.isSaved = true
             }
-        })
+        }
         viewModel.checkPokemon()
-        viewModel.pokemonDetailsDataToSend.observe(this, { data ->
-            data?.let {
-                val pokemonToJson = Gson().toJson(it)
-                Log.i("pokemonJson2", pokemonToJson)
-
-                setupViewPager(pokemonToJson)
+        viewModel.state.observe(viewLifecycleOwner) { data ->
+            when(data) {
+                is UIState.Loading -> {}
+                is UIState.Success<*> -> {
+                    data.let {
+                        if (it.content != null) {
+                            val pokemonToJson = Gson().toJson(it.content)
+                            binding.pokemon = it.content as PokemonDetails
+                            setupViewPager(pokemonToJson)
+                            setupFavoriteButton(it.content)
+                        }
+                    }
+                }
+                is UIState.Error -> {
+                    Toast.makeText(context, data.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
             }
-        })
+        }
     }
 
-    private fun setupFavoriteButton() {
+    private fun setupFavoriteButton(pokemon: PokemonDetails) {
         binding.favoriteButton.setOnClickListener {
             if (!binding.isSaved) {
-                viewModel.pokemonDetailsData.value?.let {
-                    viewModel.insertPokemon(it)
-                    Toast.makeText(context, "${it.name?.capitalize()} is saved!", Toast.LENGTH_SHORT).show()
+                pokemon.let { pokeData ->
+                    viewModel.insertPokemon(pokeData)
+                    Toast.makeText(context, "${pokeData.name?.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.getDefault()
+                        ) else it.toString()
+                    }} is saved!", Toast.LENGTH_SHORT).show()
                 }
                 binding.isSaved = true
             } else {
-                viewModel.pokemonDetailsData.value?.let {
-                    viewModel.deletePokemon(it.id!!)
-                    Toast.makeText(context, "${it.name?.capitalize()} is deleted", Toast.LENGTH_SHORT).show()
+                pokemon.let { pokeData ->
+                    viewModel.deletePokemon(pokeData.id!!)
+                    Toast.makeText(context, "${pokeData.name?.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.getDefault()
+                        ) else it.toString()
+                    }} is deleted", Toast.LENGTH_SHORT).show()
                 }
                 binding.isSaved = false
             }

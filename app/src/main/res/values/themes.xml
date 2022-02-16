@@ -13,6 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
         <item name="actionBarTheme">@style/MyActionBarStyle</item>
         <item name="snackbarStyle">@style/MySnackbarStyle</item>
         <item name="snackbarTextViewStyle">@style/MySnackbarTextViewStyle</item>
@@ -99,11 +101,20 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginRight">8dp</item>
         <item name="android:layout_marginLeft">8dp</item>
+        <item name="tint">@color/black</item>
     </style>
-    <style name="FilterSpinner" parent="Base.Widget.AppCompat.Spinner.Underlined">
+    <style name="FilterSpinner" parent="Widget.AppCompat.Spinner">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="CancelFilterBtn" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ApplyFilterBtn" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

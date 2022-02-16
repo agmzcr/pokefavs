@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.databinding.FragmentFilterDialogBinding
 import dev.agmzcr.pokefavs.util.Filters
@@ -16,27 +18,30 @@ class FilterDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentFilterDialogBinding
     private var filterListener: FilterListener? = null
+    private val viewModel: FavoritesViewModel by activityViewModels()
 
     interface FilterListener {
         fun onFilter(filters: Filters)
     }
 
-    private val selectedSortBy: String?
+    private val selectedSortBy: Int?
         get() {
             val selected = binding.spinnerSort.selectedItem as String
             if (getString(R.string.sort_by_number) == selected) {
-                Log.i("selected1", "selected por valoracion")
-                return "number"
+                //viewModel.setFilters(0)
+                Log.i("selected0", "selected por number")
+                return 0
             }
             return if (getString(R.string.sort_by_name) == selected) {
-                Log.i("selected1", "selected por popular")
-                "name"
+                //viewModel.setFilters(1)
+                Log.i("selected1", "selected por name")
+                1
             } else {
                 null
             }
         }
 
-    val filters: Filters
+    private val filters: Filters
         get() {
             val filters = Filters()
 
@@ -55,7 +60,10 @@ class FilterDialogFragment : DialogFragment() {
     ): View? {
         binding = FragmentFilterDialogBinding.inflate(inflater, container, false)
 
-        binding.buttonSearch.setOnClickListener { onSearchClicked() }
+        if (viewModel.getFilters() != null) {
+            viewModel.getFilters()!!.sortBy?.let { binding.spinnerSort.setSelection(it) }
+        }
+        binding.buttonFilter.setOnClickListener { onFilterClicked() }
         binding.buttonCancel.setOnClickListener { onCancelClicked() }
 
         return binding.root
@@ -76,7 +84,7 @@ class FilterDialogFragment : DialogFragment() {
         }
     }
 
-    private fun onSearchClicked() {
+    private fun onFilterClicked() {
         filterListener?.onFilter(filters)
         dismiss()
     }
