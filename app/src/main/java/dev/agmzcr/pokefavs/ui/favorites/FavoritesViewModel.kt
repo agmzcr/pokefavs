@@ -1,13 +1,12 @@
 package dev.agmzcr.pokefavs.ui.favorites
 
-import android.util.Log
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.data.repository.DataStoreManager
 import dev.agmzcr.pokefavs.data.repository.PokemonRepository
 import dev.agmzcr.pokefavs.util.Filters
-import dev.agmzcr.pokefavs.util.UIState
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,37 +17,31 @@ class FavoritesViewModel @Inject constructor(
     private val dataStore: DataStoreManager
 ): ViewModel() {
 
-    private val _favoritesList = MutableLiveData<UIState>()
-    val favoritesList: LiveData<UIState> = _favoritesList
+    init {
+        getFilters()
+    }
 
-    val favoritesListOrderByIds = pokemonRepository.getAllSavedPokemonOrderByIds().asLiveData()
-    val favoritesListOrderByNames = pokemonRepository.getAllSavedPokemonOrderByNames().asLiveData()
+    private val _filters = MutableLiveData<Filters>()
+    val filters: LiveData<Filters> = _filters
+
+    private val _favoriteList = MutableLiveData<List<PokemonDetails>>()
+    val favoriteList: LiveData<List<PokemonDetails>> = _favoriteList
+
+    val favoritesListOrderByIds = pokemonRepository.getAllSavedPokemonOrderByIds()
+    val favoritesListOrderByNames = pokemonRepository.getAllSavedPokemonOrderByNames()
 
     var filtersDefault: Filters = Filters.default
 
+
     fun favoritesListOrderByIds() {
         viewModelScope.launch {
-            _favoritesList.postValue(UIState.Loading)
-            try {
-                pokemonRepository.getAllSavedPokemonOrderByIds().collect {
-                    _favoritesList.postValue(UIState.Success(it))
-                }
-            } catch (e:Exception) {
-                _favoritesList.postValue(UIState.Error(e.message.toString()))
-            }
+            _favoriteList.value = pokemonRepository.getAllSavedPokemonOrderByIds()
         }
     }
 
     fun favoritesListOrderByNames() {
         viewModelScope.launch {
-            _favoritesList.postValue(UIState.Loading)
-            try {
-                pokemonRepository.getAllSavedPokemonOrderByIds().collect {
-                    _favoritesList.postValue(UIState.Success(it))
-                }
-            } catch (e:Exception) {
-                _favoritesList.postValue(UIState.Error(e.message.toString()))
-            }
+            _favoriteList.value = pokemonRepository.getAllSavedPokemonOrderByNames()
         }
     }
 
@@ -58,12 +51,16 @@ class FavoritesViewModel @Inject constructor(
         }
     }
 
-    fun getFilters(): Filters? {
-        var data = Filters()
+    private fun getFilters() {
         viewModelScope.launch {
-            dataStore.getFiltersFromPreferencesStore.collect { data = it!! }
+            dataStore.getFiltersFromPreferencesStore.collect {
+                if (it == null) {
+                    _filters.postValue(Filters.default)
+                } else {
+                    _filters.postValue(it)
+                }
+            }
         }
-        return data
     }
 
     fun deletePokemon(id: Int) {

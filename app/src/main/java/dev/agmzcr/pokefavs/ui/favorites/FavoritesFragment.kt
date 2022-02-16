@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
@@ -36,7 +37,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
 
     private lateinit var binding: FragmentFavoritesBinding
     private val adapter =  FavoritesListAdapter(this)
-    private val viewModel: FavoritesViewModel by viewModels()
+    private val viewModel: FavoritesViewModel by activityViewModels()
     private lateinit var filterDialog: FilterDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +54,25 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
             lifecycleOwner = viewLifecycleOwner
         }
         setupRecyclerView()
+        setupObserverList()
+        getListFiltered()
+    }
+
+    private fun setupObserverList() {
+        viewModel.favoriteList.observe(viewLifecycleOwner) {
+            if(it.isEmpty()) {
+                checkEmpty(true)
+            } else {
+                checkEmpty(false)
+                adapter.submitList(it)
+            }
+        }
+    }
+
+    private fun getListFiltered() {
+        viewModel.filters.observe(viewLifecycleOwner) {
+            onFilter(it)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -71,45 +91,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
 
     }
 
-    private fun setupObserverByIds() {
-        viewModel.favoritesListOrderByIds()
-        viewModel.favoritesList.observe(viewLifecycleOwner) { list ->
-            when(list) {
-                is UIState.Loading -> {}
-                is UIState.Success<*> -> {
-                    adapter.submitList(list.content as MutableList<PokemonDetails>?)
-                    checkEmpty()
-                }
-                is UIState.Error -> {
-                    Toast.makeText(context, list.errorMessage, Toast.LENGTH_SHORT).show()
-                    Log.e("FavoritesFrament", list.errorMessage!!)
-                }
-                else -> {}
-            }
-        }
-    }
-
-    private fun setupObserverByNames() {
-        viewModel.favoritesListOrderByNames()
-        viewModel.favoritesList.observe(viewLifecycleOwner) { list ->
-            when(list) {
-                is UIState.Loading -> {}
-                is UIState.Success<*> -> {
-                    adapter.submitList(list.content as MutableList<PokemonDetails>?)
-                    checkEmpty()
-                }
-                is UIState.Error -> {
-                    Toast.makeText(context, list.errorMessage, Toast.LENGTH_SHORT).show()
-                    Log.e("FavoritesFrament", list.errorMessage!!)
-                }
-                else -> {}
-            }
-        }
-    }
-
-    private fun checkEmpty() {
+    private fun checkEmpty(empty: Boolean) {
         binding.apply {
-            if (adapter.itemCount == 0) {
+            if (empty) {
                 imageEmpty.visibility = View.VISIBLE
                 textEmpty.visibility = View.VISIBLE
             } else {
@@ -148,6 +132,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
                         }.show()
                     }
                 }
+                getListFiltered()
             }
         }
         ItemTouchHelper(itemTouchHelperCallback).apply {
@@ -165,22 +150,12 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
     override fun onFilter(filters: Filters) {
 
         if (filters.sortBy == 0) {
-            setupObserverByIds()
+            viewModel.favoritesListOrderByIds()
         } else {
-            setupObserverByNames()
+            viewModel.favoritesListOrderByNames()
         }
 
         viewModel.setFilters(filters)
         viewModel.filtersDefault = filters
     }
-
-    override fun onStart() {
-        super.onStart()
-        if (viewModel.getFilters()?.sortBy == null) {
-            onFilter(viewModel.filtersDefault)
-        } else {
-            onFilter(viewModel.getFilters()!!)
-        }
-    }
-
 }

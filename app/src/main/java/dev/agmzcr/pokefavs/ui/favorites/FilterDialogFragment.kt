@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.databinding.FragmentFilterDialogBinding
 import dev.agmzcr.pokefavs.util.Filters
@@ -28,14 +27,12 @@ class FilterDialogFragment : DialogFragment() {
         get() {
             val selected = binding.spinnerSort.selectedItem as String
             if (getString(R.string.sort_by_number) == selected) {
-                //viewModel.setFilters(0)
                 Log.i("selected0", "selected por number")
                 return 0
             }
             return if (getString(R.string.sort_by_name) == selected) {
-                //viewModel.setFilters(1)
                 Log.i("selected1", "selected por name")
-                1
+                return 1
             } else {
                 null
             }
@@ -60,8 +57,8 @@ class FilterDialogFragment : DialogFragment() {
     ): View? {
         binding = FragmentFilterDialogBinding.inflate(inflater, container, false)
 
-        if (viewModel.getFilters() != null) {
-            viewModel.getFilters()!!.sortBy?.let { binding.spinnerSort.setSelection(it) }
+        viewModel.filters.observe(viewLifecycleOwner) {
+            binding.spinnerSort.setSelection(it.sortBy!!)
         }
         binding.buttonFilter.setOnClickListener { onFilterClicked() }
         binding.buttonCancel.setOnClickListener { onCancelClicked() }

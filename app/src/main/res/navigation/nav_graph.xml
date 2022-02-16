@@ -22,6 +22,7 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="dev.agmzcr.pokefavs.ui.favorites.FavoritesFragment"
+        android:label="Favorites"
         tools:layout="@layout/fragment_favorites">
         <action
             android:id="@+id/action_favorites_to_details"

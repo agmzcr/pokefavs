@@ -149,10 +149,10 @@ class PokemonRepository @Inject constructor(
     fun isPokemonSavedByName(name: String): Boolean =
         db.favoritesDao().isPokemonSavedByName(name)
 
-    fun getAllSavedPokemonOrderByIds(): Flow<List<PokemonDetails>> =
+    fun getAllSavedPokemonOrderByIds(): List<PokemonDetails> =
         db.favoritesDao().getAllSavedPokemonByIds()
 
-    fun getAllSavedPokemonOrderByNames(): Flow<List<PokemonDetails>> =
+    fun getAllSavedPokemonOrderByNames(): List<PokemonDetails> =
         db.favoritesDao().getAllSavedPokemonOrderByNames()
 
     fun getSavedPokemonById(id: Int) =

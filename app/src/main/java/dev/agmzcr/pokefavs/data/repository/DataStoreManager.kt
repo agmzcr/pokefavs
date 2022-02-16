@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private val Context.dataStore by preferencesDataStore("filters")
 
 @Singleton
 class DataStoreManager @Inject constructor(@ApplicationContext appContext: Context) {
+    private val Context.dataStore by preferencesDataStore("filters")
 
     private val filtersDataStore = appContext.dataStore
 
@@ -31,7 +31,7 @@ class DataStoreManager @Inject constructor(@ApplicationContext appContext: Conte
 
     val getFiltersFromPreferencesStore: Flow<Filters?> = filtersDataStore.data.map {
         val data = Filters(
-            sortBy = it[SORTBY]
+            sortBy = it[SORTBY] ?: 0
         )
         data
     }
