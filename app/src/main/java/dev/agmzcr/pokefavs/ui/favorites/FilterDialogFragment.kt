@@ -41,7 +41,6 @@ class FilterDialogFragment : DialogFragment() {
     private val filters: Filters
         get() {
             val filters = Filters()
-
             filters.sortBy = selectedSortBy
 
             return filters
@@ -57,9 +56,9 @@ class FilterDialogFragment : DialogFragment() {
     ): View? {
         binding = FragmentFilterDialogBinding.inflate(inflater, container, false)
 
-        viewModel.filters.observe(viewLifecycleOwner) {
+        /*viewModel.filters.observe(viewLifecycleOwner) {
             binding.spinnerSort.setSelection(it.sortBy!!)
-        }
+        }*/
         binding.buttonFilter.setOnClickListener { onFilterClicked() }
         binding.buttonCancel.setOnClickListener { onCancelClicked() }
 

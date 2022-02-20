@@ -15,34 +15,34 @@ class PokedexLoadStateAdapter(
     override fun onBindViewHolder(
         holder: PokedexLoadStateAdapter.StateItemViewHolder,
         loadState: LoadState
-    ) {
-        val progress = holder.binding.progressBar
-        val txtErrorMessage = holder.binding.errorMsg
-        val errorBtn = holder.binding.retryButton
+    ) = holder.bind(loadState)
 
-        progress.isVisible = loadState is LoadState.Loading
-        txtErrorMessage.isVisible = loadState is LoadState.Error
-        errorBtn.isVisible = loadState is LoadState.Error
-
-        if (loadState is LoadState.Error) {
-            txtErrorMessage.text = loadState.error.localizedMessage
-        }
-        errorBtn.setOnClickListener {
-            retry.invoke()
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): StateItemViewHolder {
-        return StateItemViewHolder(
-            ItemNetworkStateBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
-        )
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) = StateItemViewHolder(
+        ItemNetworkStateBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        retry
+    )
 
     class StateItemViewHolder(
-        val binding: ItemNetworkStateBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemNetworkStateBinding,
+        retry: () -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.retryButton.setOnClickListener { retry() }
+        }
+
+        fun bind(loadState: LoadState) {
+            if (loadState is LoadState.Error) {
+                binding.errorMsg.text = loadState.error.localizedMessage
+            }
+
+            binding.apply {
+                progressBar.isVisible = loadState is LoadState.Loading
+                retryButton.isVisible = loadState is LoadState.Error
+                errorMsg.isVisible = loadState is LoadState.Error
+            }
+        }
+
     }
 
 }

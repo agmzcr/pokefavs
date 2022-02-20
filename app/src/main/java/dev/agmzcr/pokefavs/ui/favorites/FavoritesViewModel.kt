@@ -1,5 +1,6 @@
 package dev.agmzcr.pokefavs.ui.favorites
 
+import android.util.Log
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
@@ -17,61 +18,38 @@ class FavoritesViewModel @Inject constructor(
     private val dataStore: DataStoreManager
 ): ViewModel() {
 
+    var filters: Filters? = null
+
+    lateinit var favoriteList: LiveData<List<PokemonDetails>>
+
     init {
         getFilters()
     }
 
-    private val _filters = MutableLiveData<Filters>()
-    val filters: LiveData<Filters> = _filters
-
-    private val _favoriteList = MutableLiveData<List<PokemonDetails>>()
-    val favoriteList: LiveData<List<PokemonDetails>> = _favoriteList
-
-    val favoritesListOrderByIds = pokemonRepository.getAllSavedPokemonOrderByIds()
-    val favoritesListOrderByNames = pokemonRepository.getAllSavedPokemonOrderByNames()
-
-    var filtersDefault: Filters = Filters.default
-
-
-    fun favoritesListOrderByIds() {
-        viewModelScope.launch {
-            _favoriteList.value = pokemonRepository.getAllSavedPokemonOrderByIds()
-        }
+    fun favoritesListOrderByIds() = viewModelScope.launch {
+        favoriteList = pokemonRepository.getAllSavedPokemonOrderByIds()
     }
 
-    fun favoritesListOrderByNames() {
-        viewModelScope.launch {
-            _favoriteList.value = pokemonRepository.getAllSavedPokemonOrderByNames()
-        }
+    fun favoritesListOrderByNames() = viewModelScope.launch {
+        favoriteList = pokemonRepository.getAllSavedPokemonOrderByNames()
     }
 
-    fun setFilters(filters: Filters) {
-        viewModelScope.launch {
+    fun setFilters(filters: Filters) = viewModelScope.launch {
             dataStore.saveFiltersToPreferencesStore(filters)
-        }
     }
 
-    private fun getFilters() {
-        viewModelScope.launch {
+    private fun getFilters() = viewModelScope.launch {
             dataStore.getFiltersFromPreferencesStore.collect {
-                if (it == null) {
-                    _filters.postValue(Filters.default)
-                } else {
-                    _filters.postValue(it)
-                }
-            }
+                    filters = it
         }
     }
 
-    fun deletePokemon(id: Int) {
-        viewModelScope.launch {
+    fun deletePokemon(id: Int) = viewModelScope.launch {
             pokemonRepository.deletePokemon(id)
-        }
+
     }
 
-    fun undoDeletion(pokemon: PokemonDetails) {
-        viewModelScope.launch {
+    fun undoDeletion(pokemon: PokemonDetails) = viewModelScope.launch {
             pokemonRepository.insertPokemon(pokemon)
-        }
     }
 }

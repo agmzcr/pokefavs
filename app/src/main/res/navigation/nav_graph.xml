@@ -8,6 +8,7 @@
 
     <fragment
         android:id="@+id/pokedexFragment"
+        android:label="PokeFavs"
         android:name="dev.agmzcr.pokefavs.ui.pokedex.PokedexFragment"
         tools:layout="@layout/fragment_pokedex">
         <action

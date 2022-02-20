@@ -1,5 +1,6 @@
 package dev.agmzcr.pokefavs.ui.favorites
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
@@ -54,24 +55,27 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
             lifecycleOwner = viewLifecycleOwner
         }
         setupRecyclerView()
-        setupObserverList()
         getListFiltered()
+        setupObserver()
     }
 
-    private fun setupObserverList() {
-        viewModel.favoriteList.observe(viewLifecycleOwner) {
-            if(it.isEmpty()) {
+    private fun setupObserver() {
+        viewModel.favoriteList.observe(viewLifecycleOwner) { list ->
+            if(list.isNullOrEmpty()) {
                 checkEmpty(true)
             } else {
                 checkEmpty(false)
-                adapter.submitList(it)
+                adapter.submitList(list)
             }
         }
     }
 
     private fun getListFiltered() {
-        viewModel.filters.observe(viewLifecycleOwner) {
-            onFilter(it)
+        val filter = viewModel.filters
+        if (filter?.sortBy == 0) {
+            viewModel.favoritesListOrderByIds()
+        } else {
+            viewModel.favoritesListOrderByNames()
         }
     }
 
@@ -107,10 +111,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
        binding.apply {
            favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
            favoriteRecyclerView.adapter = adapter
+           favoriteRecyclerView.setHasFixedSize(true)
        }
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
             override fun onMove(
@@ -125,6 +130,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
                 val position = viewHolder.absoluteAdapterPosition
                 val pokemon = adapter.currentList[position]
                 viewModel.deletePokemon(pokemon.id!!)
+
                 view?.let {
                     Snackbar.make(it, "Pokemon deleted", Snackbar.LENGTH_LONG).apply {
                         setAction("Undo") {
@@ -132,7 +138,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
                         }.show()
                     }
                 }
-                getListFiltered()
             }
         }
         ItemTouchHelper(itemTouchHelperCallback).apply {
@@ -140,7 +145,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
         }
     }
 
-    override fun onItemClick(pokemon: PokemonDetails) {
+    override fun onClick(pokemon: PokemonDetails) {
         val action = FavoritesFragmentDirections.actionFavoritesToDetails(
             pokemonName = pokemon.name!!
         )
@@ -148,7 +153,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
     }
 
     override fun onFilter(filters: Filters) {
-
         if (filters.sortBy == 0) {
             viewModel.favoritesListOrderByIds()
         } else {
@@ -156,6 +160,5 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
         }
 
         viewModel.setFilters(filters)
-        viewModel.filtersDefault = filters
     }
 }

@@ -16,10 +16,10 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 
-class Connection(val context: Context) : LiveData<Boolean>(){
+class CheckConnection(val context: Context) : LiveData<Boolean>(){
 
-    var  intentFilter = IntentFilter(CONNECTIVITY_ACTION)
-    private var  connectivityManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+    var intentFilter = IntentFilter(CONNECTIVITY_ACTION)
+    private var connectivityManager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
     private var networkCallback : NetworkCallback = NetworkCallback(this)
 
     override fun onActive() {
@@ -47,7 +47,7 @@ class Connection(val context: Context) : LiveData<Boolean>(){
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    class NetworkCallback(private val liveData : Connection) : ConnectivityManager.NetworkCallback() {
+    class NetworkCallback(private val liveData : CheckConnection) : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
             liveData.postValue(true)
         }

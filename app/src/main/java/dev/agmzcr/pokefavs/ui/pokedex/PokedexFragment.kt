@@ -3,6 +3,7 @@ package dev.agmzcr.pokefavs.ui.pokedex
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.data.model.PokemonResults
 import dev.agmzcr.pokefavs.databinding.FragmentPokedexBinding
-import dev.agmzcr.pokefavs.util.Connection
+import dev.agmzcr.pokefavs.util.CheckConnection
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,7 +24,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class PokedexFragment : Fragment(R.layout.fragment_pokedex), PokedexAdapter.OnClickListener {
 
-    private var hasInitiatedInitialCall = false
     private val viewModel: PokedexViewModel by viewModels()
     private val adapter = PokedexAdapter(this)
     private lateinit var binding: FragmentPokedexBinding
@@ -31,24 +31,21 @@ class PokedexFragment : Fragment(R.layout.fragment_pokedex), PokedexAdapter.OnCl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        checkNetworkLiveData()
         super.onCreate(savedInstanceState)
     }
 
+    // This livedata help to iniciate automatically start the fetch if it detects
+    // that the connection is ready
     private fun checkNetworkLiveData() {
-        val connectionLiveData = Connection(context!!)
-        connectionLiveData.observe(this, {
-            if (!it) {
-                binding.progressBar.hide()
-                binding.networkStatus = false
+        val connectionLiveData = CheckConnection(requireContext())
+        connectionLiveData.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                setupFetchingPokemons(null)
+                binding.errorText.visibility = View.GONE
             } else {
-                binding.networkStatus = true
-                if (!hasInitiatedInitialCall) {
-                    setupFetchingPokemons(null)
-                    hasInitiatedInitialCall = true
-                }
+                binding.errorText.visibility = View.VISIBLE
             }
-        })
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,8 +53,9 @@ class PokedexFragment : Fragment(R.layout.fragment_pokedex), PokedexAdapter.OnCl
         binding = FragmentPokedexBinding.bind(view)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewmodel = viewModel
+            vm = viewModel
         }
+        checkNetworkLiveData()
         setupRecyclerView()
         setupRefresh()
     }
@@ -129,14 +127,13 @@ class PokedexFragment : Fragment(R.layout.fragment_pokedex), PokedexAdapter.OnCl
                     else -> null
                 }
                 errorState?.let {
-                    //Toast.makeText(context, it.error.message, Toast.LENGTH_LONG).show()
-                    Log.d("LoadStateError", it.error.message!!)
+                    Log.d("LoadStateError", it.error.toString())
                 }
             }
         }
     }
 
-    override fun onItemClick(pokemon: PokemonResults) {
+    override fun onClick(pokemon: PokemonResults) {
         val action = PokedexFragmentDirections.actionPokedexToDetails(
             pokemonName = pokemon.name
         )

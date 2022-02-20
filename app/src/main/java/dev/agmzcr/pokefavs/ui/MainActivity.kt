@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         actionBar = supportActionBar!!
         actionBar.let {
             it.elevation = 0F
-            it.title = "PokeFavs"
         }
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(setOf(R.id.pokedexFragment, R.id.favoritesFragment))

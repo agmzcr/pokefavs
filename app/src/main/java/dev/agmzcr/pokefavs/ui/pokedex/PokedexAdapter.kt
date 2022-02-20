@@ -13,7 +13,7 @@ class PokedexAdapter(
 ) : PagingDataAdapter<PokemonResults, PokedexAdapter.ViewHolder>(COMPARATOR) {
 
     interface OnClickListener {
-        fun onItemClick(pokemon: PokemonResults)
+        fun onClick(pokemon: PokemonResults)
     }
 
     override fun onCreateViewHolder(
@@ -49,7 +49,7 @@ class PokedexAdapter(
                 if (position != RecyclerView.NO_POSITION) {
                     val pokemon = getItem(position)
                     if (pokemon != null) {
-                        clickListener.onItemClick(pokemon)
+                        clickListener.onClick(pokemon)
                     }
                 }
             }

@@ -7,7 +7,6 @@ import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.agmzcr.pokefavs.data.model.PokemonResults
 import dev.agmzcr.pokefavs.data.repository.PokemonRepository
-import dev.agmzcr.pokefavs.util.Connection
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

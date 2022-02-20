@@ -1,5 +1,6 @@
 package dev.agmzcr.pokefavs.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,10 +19,10 @@ interface FavoritesDao {
     suspend fun delete(pokemonId: Int)
 
     @Query("SELECT * FROM favorites ORDER BY id")
-    fun getAllSavedPokemonByIds(): List<PokemonDetails>
+    fun getAllSavedPokemonByIds(): LiveData<List<PokemonDetails>>
 
     @Query("SELECT * FROM favorites ORDER BY name")
-    fun getAllSavedPokemonOrderByNames(): List<PokemonDetails>
+    fun getAllSavedPokemonOrderByNames(): LiveData<List<PokemonDetails>>
 
     @Query("SELECT * FROM favorites WHERE id LIKE :id")
     fun getSavedPokemonById(id: Int): Flow<PokemonDetails>

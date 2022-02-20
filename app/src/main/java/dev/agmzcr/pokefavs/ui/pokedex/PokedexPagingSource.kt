@@ -33,7 +33,7 @@ class PokedexPagingSource(
             LoadResult.Page(
                 data = filteredData,
                 prevKey = if (offsetValue == 0) null else  offsetValue - loadSize,
-                nextKey = if (response.next == null) null else offsetValue + loadSize
+                nextKey = offsetValue + loadSize
             )
         } catch (e: IOException) {
             LoadResult.Error(e)

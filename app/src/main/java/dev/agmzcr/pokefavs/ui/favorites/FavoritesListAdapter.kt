@@ -10,10 +10,10 @@ import dev.agmzcr.pokefavs.databinding.FavoriteListItemBinding
 
 class FavoritesListAdapter(
     private val clickListener: ClickListener
-): ListAdapter<PokemonDetails, FavoritesListAdapter.ViewHolder>(DiffCallback()) {
+): ListAdapter<PokemonDetails, FavoritesListAdapter.ViewHolder>(COMPARATOR) {
 
     interface ClickListener {
-        fun onItemClick(pokemon: PokemonDetails)
+        fun onClick(pokemon: PokemonDetails)
     }
 
     override fun onCreateViewHolder(
@@ -39,7 +39,7 @@ class FavoritesListAdapter(
                     if (position != RecyclerView.NO_POSITION) {
                         val pokemon = getItem(position)
                         if (pokemon != null) {
-                            clickListener.onItemClick(pokemon)
+                            clickListener.onClick(pokemon)
                         }
                     }
                 }
@@ -52,7 +52,7 @@ class FavoritesListAdapter(
             }
         }
 
-    class DiffCallback: DiffUtil.ItemCallback<PokemonDetails>() {
+    /*class DiffCallback: DiffUtil.ItemCallback<PokemonDetails>() {
         override fun areItemsTheSame(oldItem: PokemonDetails, newItem: PokemonDetails): Boolean {
             return oldItem.id == newItem.id
         }
@@ -61,6 +61,20 @@ class FavoritesListAdapter(
             return oldItem == newItem
         }
 
+    }*/
+
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<PokemonDetails>() {
+            override fun areItemsTheSame(
+                oldItem: PokemonDetails,
+                newItem: PokemonDetails
+            ) = oldItem.id == newItem.id
+
+            override fun areContentsTheSame(
+                oldItem: PokemonDetails,
+                newItem: PokemonDetails
+            ) = oldItem == newItem
+        }
     }
 
 }
