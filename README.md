@@ -49,5 +49,6 @@ Basic MVVM architecture with repository.
 * Keep learning.
 
 ## Acknowledgments ❤
-* [jfransp](https://github.com/jfransp) - I inspired on you Pokedex app.
+* [jfransp](https://github.com/jfransp) - I was inspired by their Pokedex app.
 * [Douglas Fornaro from dev.to](https://dev.to/douglascf/definitive-guide-to-paging-3-2nh4) - This tutorial helped me to understand and implement the Paging3 library.
+* [Stackoverflow](https://stackoverflow.com/) - Helped me with bug fixes and implementations.
