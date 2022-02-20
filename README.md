@@ -46,6 +46,7 @@ Basic MVVM architecture with repository.
 
 * Add tests.
 * More filters options on favorites list.
+* Keep learning.
 
 ## Acknowledgments ❤
 * [jfransp](https://github.com/jfransp) - I inspired on you Pokedex app.
