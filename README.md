@@ -44,6 +44,7 @@ Basic MVVM architecture with repository.
 
 ## Future improvements
 
+* Comment more.
 * Add tests.
 * More filters options on favorites list.
 * Keep learning.
