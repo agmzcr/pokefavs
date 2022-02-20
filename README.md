@@ -2,12 +2,12 @@
 _I am current developer student and I developing this app for learning and pratice. Is Pokedex app for Android where you can save you favorites pokemons. I using Android Architecture components and MVVM architecture.
 This app was inspired by [jfransp](https://github.com/jfransp/Pokedex) Pokedex application._
 
-## Light Theme
+## Light Theme Screenshots
 |Pokedex|Details/About|Details/Stats|Details/Evolutions|Favorites|
 |------------|-------------|------------|-------------|------------|
 | <img src="screenshots/Screenshot_Day1.png"> | <img src="screenshots/Screenshot_Day2.png"> | <img src="screenshots/Screenshot_Day3.png"> | <img src="screenshots/Screenshot_Day4.png"> | <img src="screenshots/Screenshot_Day5.png"> |
 
-## Dark Theme
+## Dark Theme Screenshots
 | Pokedex      | Details/About      | Details/Stats | Details/Evolutions | Favorites  |
 |------------|-------------|------------|-------------|------------|
 | <img src="screenshots/Screenshot_Night1.png"> | <img src="screenshots/Screenshot_Night2.png"> | <img src="screenshots/Screenshot_Night3.png"> | <img src="screenshots/Screenshot_Night4.png"> | <img src="screenshots/Screenshot_Night5.png"> |
