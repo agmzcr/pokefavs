@@ -3,11 +3,8 @@ package dev.agmzcr.pokefavs.ui.details
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.ui.details.about.AboutFragment
 import dev.agmzcr.pokefavs.ui.details.evolution.EvolutionFragment
 import dev.agmzcr.pokefavs.ui.details.stats.StatsFragment

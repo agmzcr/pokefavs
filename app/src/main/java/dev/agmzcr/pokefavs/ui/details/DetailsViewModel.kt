@@ -5,10 +5,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.data.repository.PokemonRepository
 import dev.agmzcr.pokefavs.util.UIState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,19 +25,15 @@ class DetailsViewModel @Inject constructor(
     private val _pokemonDetailsData = MutableLiveData<PokemonDetails>()
     val pokemonDetailsData: LiveData<PokemonDetails?> = _pokemonDetailsData
 
-    private val _pokemonDetailsDataToSend = MutableLiveData<PokemonDetails?>(null)
-    val pokemonDetailsDataToSend: LiveData<PokemonDetails?> = _pokemonDetailsDataToSend
+    //private val _pokemonDetailsDataToSend = MutableLiveData<PokemonDetails?>(null)
+    //val pokemonDetailsDataToSend: LiveData<PokemonDetails?> = _pokemonDetailsDataToSend
 
-    /*private val _pokemonDetailsData2 = MutableLiveData<PokemonDetails>()
-    val pokemonDetailsData2: LiveData<PokemonDetails> = _pokemonDetailsData2*/
 
     fun checkPokemon() {
         if (isPokemonSavedByName(pokemonName!!)) {
-            //getPokemonDetailsFromDbByName()
-            getPokemonDetailsFromDbByName2()
+            getPokemonDetailsFromDbByName()
         } else {
-            //getPokemonDetailsFromApiByName()
-            getPokemonDetailsFromApiByName2()
+            getPokemonDetailsFromApiByName()
         }
     }
 
@@ -49,19 +41,8 @@ class DetailsViewModel @Inject constructor(
         _pokemonDetailsData.value = pokemon
     }
 
-    private fun getPokemonDetailsFromDbById() = viewModelScope.launch {
-            _isSaved.value = isPokemonSavedById(pokemonDetailsData.value!!.id!!)
-    }
 
-    /*private fun getPokemonDetailsFromDbByName() = viewModelScope.launch {
-         pokemonRepository.getSavedPokemonByName(pokemonName!!).collect {
-             _pokemonDetailsData.value = it
-             _pokemonDetailsDataToSend.value = it
-             _isSaved.value = isPokemonSavedById(it.id!!)
-         }
-    }*/
-
-    private fun getPokemonDetailsFromDbByName2() {
+    private fun getPokemonDetailsFromDbByName() {
         viewModelScope.launch {
             _state.postValue(UIState.Loading)
             try {
@@ -75,13 +56,8 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private fun getPokemonDetailsFromApiByName() = viewModelScope.launch {
-        _pokemonDetailsData.value = pokemonRepository.getPokemonData(pokemonName!!)
-        _pokemonDetailsDataToSend.value = _pokemonDetailsData.value
-        _isSaved.value = isPokemonSavedById(pokemonDetailsData.value!!.id!!)
-    }
 
-    private fun getPokemonDetailsFromApiByName2() {
+    private fun getPokemonDetailsFromApiByName() {
         viewModelScope.launch {
             _state.postValue(UIState.Loading)
             try {
@@ -114,10 +90,4 @@ class DetailsViewModel @Inject constructor(
         viewModelScope.launch {
             pokemonRepository.deletePokemon(id)
         }
-
-    /*fun getPokemonDetailsFromApiAgain(name: String) {
-        viewModelScope.launch(Dispatchers.Main) {
-            _pokemonDetailsData2.value = pokemonRepository.getPokemonData(name)
-        }
-    }*/
 }

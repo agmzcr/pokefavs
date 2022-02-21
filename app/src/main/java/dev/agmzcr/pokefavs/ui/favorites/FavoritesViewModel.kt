@@ -1,6 +1,5 @@
 package dev.agmzcr.pokefavs.ui.favorites
 
-import android.util.Log
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
@@ -8,7 +7,6 @@ import dev.agmzcr.pokefavs.data.repository.DataStoreManager
 import dev.agmzcr.pokefavs.data.repository.PokemonRepository
 import dev.agmzcr.pokefavs.util.Filters
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject

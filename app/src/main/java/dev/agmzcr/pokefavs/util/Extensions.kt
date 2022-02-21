@@ -1,11 +1,5 @@
 package dev.agmzcr.pokefavs.util
 
-import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import androidx.palette.graphics.Palette
 import dev.agmzcr.pokefavs.R
 
 fun String.asResourceId(): Int {

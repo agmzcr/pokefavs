@@ -2,10 +2,11 @@ package dev.agmzcr.pokefavs.ui.pokedex
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController

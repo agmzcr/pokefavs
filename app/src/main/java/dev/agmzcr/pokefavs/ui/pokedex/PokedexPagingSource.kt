@@ -4,10 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import dev.agmzcr.pokefavs.data.model.PokemonResults
 import dev.agmzcr.pokefavs.data.remote.PokeApi
-import dev.agmzcr.pokefavs.util.extractPokemonIdFromUrl
 import retrofit2.HttpException
 import java.io.IOException
-import java.lang.Exception
 
 class PokedexPagingSource(
     private val api: PokeApi,

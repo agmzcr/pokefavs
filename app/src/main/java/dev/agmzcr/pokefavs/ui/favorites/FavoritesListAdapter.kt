@@ -10,7 +10,7 @@ import dev.agmzcr.pokefavs.databinding.FavoriteListItemBinding
 
 class FavoritesListAdapter(
     private val clickListener: ClickListener
-): ListAdapter<PokemonDetails, FavoritesListAdapter.ViewHolder>(COMPARATOR) {
+): ListAdapter<PokemonDetails, FavoritesListAdapter.ViewHolder>(DiffCallback()) {
 
     interface ClickListener {
         fun onClick(pokemon: PokemonDetails)
@@ -52,7 +52,7 @@ class FavoritesListAdapter(
             }
         }
 
-    /*class DiffCallback: DiffUtil.ItemCallback<PokemonDetails>() {
+    class DiffCallback: DiffUtil.ItemCallback<PokemonDetails>() {
         override fun areItemsTheSame(oldItem: PokemonDetails, newItem: PokemonDetails): Boolean {
             return oldItem.id == newItem.id
         }
@@ -61,20 +61,5 @@ class FavoritesListAdapter(
             return oldItem == newItem
         }
 
-    }*/
-
-    companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<PokemonDetails>() {
-            override fun areItemsTheSame(
-                oldItem: PokemonDetails,
-                newItem: PokemonDetails
-            ) = oldItem.id == newItem.id
-
-            override fun areContentsTheSame(
-                oldItem: PokemonDetails,
-                newItem: PokemonDetails
-            ) = oldItem == newItem
-        }
     }
-
 }

@@ -1,15 +1,12 @@
 package dev.agmzcr.pokefavs.ui.favorites
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +17,6 @@ import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.databinding.FragmentFavoritesBinding
 import dev.agmzcr.pokefavs.util.Filters
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(R.layout.fragment_favorites),
