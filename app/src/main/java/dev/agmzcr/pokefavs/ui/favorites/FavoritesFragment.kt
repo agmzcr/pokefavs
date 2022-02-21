@@ -1,35 +1,26 @@
 package dev.agmzcr.pokefavs.ui.favorites
 
-import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
-import android.text.TextUtils
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.agmzcr.pokefavs.R
 import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.databinding.FragmentFavoritesBinding
 import dev.agmzcr.pokefavs.util.Filters
-import dev.agmzcr.pokefavs.util.UIState
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(R.layout.fragment_favorites),
@@ -71,12 +62,15 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
     }
 
     private fun getListFiltered() {
-        val filter = viewModel.filters
-        if (filter?.sortBy == 0) {
-            viewModel.favoritesListOrderByIds()
-        } else {
-            viewModel.favoritesListOrderByNames()
-        }
+            viewModel.getFilters().observe(viewLifecycleOwner) { filter ->
+                if (filter != null) {
+                    if (filter.sortBy == 0) {
+                        viewModel.favoritesListOrderByIds()
+                    } else {
+                        viewModel.favoritesListOrderByNames()
+                    }
+                }
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -138,6 +132,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
                         }.show()
                     }
                 }
+                getListFiltered()
             }
         }
         ItemTouchHelper(itemTouchHelperCallback).apply {

@@ -19,10 +19,10 @@ interface FavoritesDao {
     suspend fun delete(pokemonId: Int)
 
     @Query("SELECT * FROM favorites ORDER BY id")
-    fun getAllSavedPokemonByIds(): LiveData<List<PokemonDetails>>
+    fun getAllSavedPokemonByIds(): List<PokemonDetails>
 
     @Query("SELECT * FROM favorites ORDER BY name")
-    fun getAllSavedPokemonOrderByNames(): LiveData<List<PokemonDetails>>
+    fun getAllSavedPokemonOrderByNames(): List<PokemonDetails>
 
     @Query("SELECT * FROM favorites WHERE id LIKE :id")
     fun getSavedPokemonById(id: Int): Flow<PokemonDetails>

@@ -56,9 +56,9 @@ class FilterDialogFragment : DialogFragment() {
     ): View? {
         binding = FragmentFilterDialogBinding.inflate(inflater, container, false)
 
-        /*viewModel.filters.observe(viewLifecycleOwner) {
-            binding.spinnerSort.setSelection(it.sortBy!!)
-        }*/
+        viewModel.getFilters().observe(viewLifecycleOwner) { filter ->
+            binding.spinnerSort.setSelection(filter?.sortBy!!)
+        }
         binding.buttonFilter.setOnClickListener { onFilterClicked() }
         binding.buttonCancel.setOnClickListener { onCancelClicked() }
 

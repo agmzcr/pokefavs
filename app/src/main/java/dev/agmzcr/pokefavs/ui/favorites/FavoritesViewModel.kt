@@ -7,6 +7,7 @@ import dev.agmzcr.pokefavs.data.model.PokemonDetails
 import dev.agmzcr.pokefavs.data.repository.DataStoreManager
 import dev.agmzcr.pokefavs.data.repository.PokemonRepository
 import dev.agmzcr.pokefavs.util.Filters
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,31 +19,28 @@ class FavoritesViewModel @Inject constructor(
     private val dataStore: DataStoreManager
 ): ViewModel() {
 
-    var filters: Filters? = null
+    private val _favoriteList = MutableLiveData<List<PokemonDetails>>()
+    val favoriteList: LiveData<List<PokemonDetails>> = _favoriteList
 
-    lateinit var favoriteList: LiveData<List<PokemonDetails>>
-
-    init {
-        getFilters()
-    }
 
     fun favoritesListOrderByIds() = viewModelScope.launch {
-        favoriteList = pokemonRepository.getAllSavedPokemonOrderByIds()
+        _favoriteList.value = pokemonRepository.getAllSavedPokemonOrderByIds()
     }
 
     fun favoritesListOrderByNames() = viewModelScope.launch {
-        favoriteList = pokemonRepository.getAllSavedPokemonOrderByNames()
+        _favoriteList.value = pokemonRepository.getAllSavedPokemonOrderByNames()
+    }
+
+    fun getFilters() = liveData(Dispatchers.IO) {
+        dataStore.getFiltersFromPreferencesStore.collect {
+            emit(it)
+        }
     }
 
     fun setFilters(filters: Filters) = viewModelScope.launch {
             dataStore.saveFiltersToPreferencesStore(filters)
     }
 
-    private fun getFilters() = viewModelScope.launch {
-            dataStore.getFiltersFromPreferencesStore.collect {
-                    filters = it
-        }
-    }
 
     fun deletePokemon(id: Int) = viewModelScope.launch {
             pokemonRepository.deletePokemon(id)
