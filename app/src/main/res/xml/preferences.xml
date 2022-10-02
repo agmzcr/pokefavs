@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <ListPreference
+        android:icon="@drawable/ic_nightlight"
+        android:defaultValue="@string/pref_ui_auto_value"
+        android:entries="@array/pref_ui_option_labels"
+        android:entryValues="@array/pref_ui_option_values"
+        android:key="@string/pref_key_ui"
+        android:summary="@string/pref_ui_label_auto"
+        android:title="UI Mode"
+        app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

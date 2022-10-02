@@ -1,5 +1,6 @@
 package dev.agmzcr.pokefavs.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -143,20 +144,13 @@ class PokemonRepository @Inject constructor(
     suspend fun deletePokemon(id: Int) =
         db.favoritesDao().delete(id)
 
-    fun isPokemonSavedById(id : Int): Boolean =
-        db.favoritesDao().isPokemonSavedById(id)
-
-    fun isPokemonSavedByName(name: String): Boolean =
-        db.favoritesDao().isPokemonSavedByName(name)
-
-    fun getAllSavedPokemonOrderByIds() =
-        db.favoritesDao().getAllSavedPokemonByIds()
-
-    fun getAllSavedPokemonOrderByNames() =
-        db.favoritesDao().getAllSavedPokemonOrderByNames()
-
-    fun getSavedPokemonById(id: Int) =
-        db.favoritesDao().getSavedPokemonById(id)
+    fun getAllFavoritesPokemons(orderBy: String): LiveData<List<PokemonDetails>> {
+        return if (orderBy == "id") {
+            db.favoritesDao().getAllSavedPokemonByIds()
+        } else {
+            db.favoritesDao().getAllSavedPokemonOrderByNames()
+        }
+    }
 
     fun getSavedPokemonByName(name: String) =
         db.favoritesDao().getSavedPokemonByName(name)

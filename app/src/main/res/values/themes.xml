@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PokeFavs" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.PokeFavs" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,15 +10,19 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:navigationBarColor">@android:color/white</item>
         <item name="actionBarTheme">@style/MyActionBarStyle</item>
         <item name="snackbarStyle">@style/MySnackbarStyle</item>
         <item name="snackbarTextViewStyle">@style/MySnackbarTextViewStyle</item>
         <item name="snackbarButtonStyle">@style/MySnackbarButtonStyle</item>
+    </style>
+
+    <style name="MyStyle.Preference.v21" parent="@style/PreferenceThemeOverlay.v14.Material">
+        <item name="android:tint">@color/grey_900</item>
     </style>
 
     <style name="MyActionBarStyle" parent="Widget.AppCompat.ActionBar">

@@ -42,12 +42,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
             lifecycleOwner = viewLifecycleOwner
         }
         setupRecyclerView()
-        getListFiltered()
-        setupObserver()
+        getList()
     }
 
-    private fun setupObserver() {
-        viewModel.favoriteList.observe(viewLifecycleOwner) { list ->
+    private fun setupObserver(orderBy: String) {
+        viewModel.favorites(orderBy).observe(viewLifecycleOwner) { list ->
             if(list.isNullOrEmpty()) {
                 checkEmpty(true)
             } else {
@@ -57,24 +56,22 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
         }
     }
 
-    private fun getListFiltered() {
+    private fun getList() {
             viewModel.getFilters().observe(viewLifecycleOwner) { filter ->
                 if (filter != null) {
-                    if (filter.sortBy == 0) {
-                        viewModel.favoritesListOrderByIds()
-                    } else {
-                        viewModel.favoritesListOrderByNames()
-                    }
+                    setupObserver(filter.sortBy!!)
                 }
             }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.favorites_buttoms, menu)
-        val filterView = menu.findItem(R.id.short_Button)
+        //val filterView = menu.findItem(R.id.short_Button)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.short_Button -> {
@@ -128,7 +125,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
                         }.show()
                     }
                 }
-                getListFiltered()
+                getList()
             }
         }
         ItemTouchHelper(itemTouchHelperCallback).apply {
@@ -144,11 +141,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
     }
 
     override fun onFilter(filters: Filters) {
-        if (filters.sortBy == 0) {
-            viewModel.favoritesListOrderByIds()
-        } else {
-            viewModel.favoritesListOrderByNames()
-        }
+        setupObserver(filters.sortBy!!)
 
         viewModel.setFilters(filters)
     }

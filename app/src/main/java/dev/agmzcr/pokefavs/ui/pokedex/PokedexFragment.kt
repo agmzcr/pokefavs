@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -61,6 +62,7 @@ class PokedexFragment : Fragment(R.layout.fragment_pokedex), PokedexAdapter.OnCl
         setupRefresh()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.search_buttom, menu)

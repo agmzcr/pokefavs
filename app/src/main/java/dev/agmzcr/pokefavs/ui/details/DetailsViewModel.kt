@@ -28,9 +28,8 @@ class DetailsViewModel @Inject constructor(
     //private val _pokemonDetailsDataToSend = MutableLiveData<PokemonDetails?>(null)
     //val pokemonDetailsDataToSend: LiveData<PokemonDetails?> = _pokemonDetailsDataToSend
 
-
     fun checkPokemon() {
-        if (isPokemonSavedByName(pokemonName!!)) {
+        if (isPokemonSaved(pokemonName!!)) {
             getPokemonDetailsFromDbByName()
         } else {
             getPokemonDetailsFromApiByName()
@@ -41,14 +40,13 @@ class DetailsViewModel @Inject constructor(
         _pokemonDetailsData.value = pokemon
     }
 
-
     private fun getPokemonDetailsFromDbByName() {
         viewModelScope.launch {
             _state.postValue(UIState.Loading)
             try {
                 pokemonRepository.getSavedPokemonByName(pokemonName!!).let {
                     _state.postValue(UIState.Success(it))
-                    _isSaved.value = isPokemonSavedById(it.id!!)
+                    //_isSaved.value = isPokemonSaved(it.name!!)
                 }
             } catch (e: Exception) {
                 _state.postValue(UIState.Error("Error"))
@@ -56,14 +54,13 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-
     private fun getPokemonDetailsFromApiByName() {
         viewModelScope.launch {
             _state.postValue(UIState.Loading)
             try {
                 pokemonRepository.getPokemonData(pokemonName!!).let {
                     _state.postValue(UIState.Success(it))
-                    _isSaved.value = isPokemonSavedById(it.id!!)
+                    //_isSaved.value = isPokemonSaved(it.name!!)
                 }
             } catch (e: Exception) {
                 _state.postValue(UIState.Error(e.message.toString()))
@@ -71,14 +68,10 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private fun isPokemonSavedById(id: Int): Boolean {
-        _isSaved.value = pokemonRepository.isPokemonSavedById(id)
-        return pokemonRepository.isPokemonSavedById(id)
-    }
-
-    private fun isPokemonSavedByName(name: String): Boolean {
-        _isSaved.value = pokemonRepository.isPokemonSavedByName(name)
-        return pokemonRepository.isPokemonSavedByName(name)
+    private fun isPokemonSaved(namePokemon: String): Boolean {
+        val pokemon = pokemonRepository.getSavedPokemonByName(namePokemon)
+        _isSaved.value = pokemon != null
+        return pokemon != null
     }
 
     fun insertPokemon(pokemon: PokemonDetails) =

@@ -11,4 +11,28 @@
         <item>@string/sort_by_number</item>
         <item>@string/sort_by_name</item>
     </string-array>
+
+
+    <string-array name="pref_ui_option_labels">
+        <item>@string/pref_ui_label_auto</item>
+        <item>@string/pref_ui_label_night</item>
+        <item>@string/pref_ui_label_day</item>
+    </string-array>
+
+    <string-array name="pref_ui_option_values">
+        <item>@string/pref_ui_auto_value</item>
+        <item>@string/pref_ui_night_value</item>
+        <item>@string/pref_ui_day_value</item>
+    </string-array>
+
+    <string name="pref_key_ui" translatable="false">key_ui_mode</string>
+
+
+    <string name="pref_ui_label_auto">Automatic</string>
+    <string name="pref_ui_label_night">Night</string>
+    <string name="pref_ui_label_day">Day</string>
+
+    <string name="pref_ui_auto_value" translatable="false">automatic</string>
+    <string name="pref_ui_night_value" translatable="false">night</string>
+    <string name="pref_ui_day_value" translatable="false">day</string>
 </resources>

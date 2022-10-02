@@ -22,16 +22,16 @@ class FilterDialogFragment : DialogFragment() {
         fun onFilter(filters: Filters)
     }
 
-    private val selectedSortBy: Int?
+    private val selectedSortBy: String?
         get() {
             val selected = binding.spinnerSort.selectedItem as String
             if (getString(R.string.sort_by_number) == selected) {
                 Log.i("selected0", "selected por number")
-                return 0
+                return "id"
             }
             return if (getString(R.string.sort_by_name) == selected) {
                 Log.i("selected1", "selected por name")
-                return 1
+                return "name"
             } else {
                 null
             }
@@ -45,10 +45,6 @@ class FilterDialogFragment : DialogFragment() {
             return filters
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +52,13 @@ class FilterDialogFragment : DialogFragment() {
         binding = FragmentFilterDialogBinding.inflate(inflater, container, false)
 
         viewModel.getFilters().observe(viewLifecycleOwner) { filter ->
-            binding.spinnerSort.setSelection(filter?.sortBy!!)
+            if (filter != null) {
+                if (filter.sortBy == "id") {
+                    binding.spinnerSort.setSelection(0)
+                } else {
+                    binding.spinnerSort.setSelection(1)
+                }
+            }
         }
         binding.buttonFilter.setOnClickListener { onFilterClicked() }
         binding.buttonCancel.setOnClickListener { onCancelClicked() }

@@ -64,13 +64,17 @@
         android:id="@+id/statsFragment"
         android:name="dev.agmzcr.pokefavs.ui.details.stats.StatsFragment"
         tools:layout="@layout/fragment_stats">
-
     </fragment>
 
     <fragment
         android:id="@+id/evolutionFragment"
         android:name="dev.agmzcr.pokefavs.ui.details.evolution.EvolutionFragment"
         tools:layout="@layout/fragment_evolution">
+    </fragment>
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="dev.agmzcr.pokefavs.ui.settings.SettingsFragment"
+        tools:layout="@xml/preferences">
     </fragment>
 </navigation>
